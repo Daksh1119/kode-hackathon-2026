@@ -1,0 +1,189 @@
+[
+  {
+    "id": "cc1722c3-6434-45fc-bbcd-2da918e793a8",
+    "severity": "HIGH",
+    "title": "Sensitive Port 21 Open \u2014 FTP",
+    "host": "kjsit.somaiya.edu.in",
+    "description": "Port 21/tcp (ftp) is publicly accessible on kjsit.somaiya.edu.in. FTP \u2014 cleartext file transfer. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 21 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T15:45:48",
+    "source": "nmap",
+    "port": 21,
+    "priority_tier": "P0",
+    "priority_score": 87,
+    "fix_efficiency": 13.0,
+    "_urgency_factors": {
+      "exploitability": 5,
+      "impact": 5,
+      "exposure": 5,
+      "privilege_potential": 5,
+      "asset_criticality": 2,
+      "evidence_confidence": 4
+    },
+    "remediation": {
+      "recommended_sla": "24h",
+      "owner_category": "Network / ITOps",
+      "effort_level": 2
+    }
+  },
+  {
+    "id": "d2a3c44d-64cb-4004-b186-e4c95581ffa7",
+    "severity": "HIGH",
+    "title": "Sensitive Port 25 Open \u2014 SMTP",
+    "host": "kjsit.somaiya.edu.in",
+    "description": "Port 25/tcp (smtp) is publicly accessible on kjsit.somaiya.edu.in. SMTP \u2014 mail relay. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 25 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T15:45:48",
+    "source": "nmap",
+    "port": 25,
+    "priority_tier": "P0",
+    "priority_score": 87,
+    "fix_efficiency": 13.0,
+    "_urgency_factors": {
+      "exploitability": 5,
+      "impact": 5,
+      "exposure": 5,
+      "privilege_potential": 5,
+      "asset_criticality": 2,
+      "evidence_confidence": 4
+    },
+    "remediation": {
+      "recommended_sla": "24h",
+      "owner_category": "Network / ITOps",
+      "effort_level": 2
+    }
+  },
+  {
+    "id": "f851f06d-beb8-4b88-901f-b0569cc9e5dc",
+    "severity": "HIGH",
+    "title": "Sensitive Port 53 Open \u2014 DOMAIN",
+    "host": "kjsit.somaiya.edu.in",
+    "description": "Port 53/tcp (domain) is publicly accessible on kjsit.somaiya.edu.in. DNS \u2014 potentially open resolver. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 53 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T15:45:48",
+    "source": "nmap",
+    "port": 53,
+    "priority_tier": "P0",
+    "priority_score": 87,
+    "fix_efficiency": 13.0,
+    "_urgency_factors": {
+      "exploitability": 5,
+      "impact": 5,
+      "exposure": 5,
+      "privilege_potential": 5,
+      "asset_criticality": 2,
+      "evidence_confidence": 4
+    },
+    "remediation": {
+      "recommended_sla": "24h",
+      "owner_category": "Network / ITOps",
+      "effort_level": 2
+    }
+  },
+  {
+    "id": "88969fe3-000b-48d5-9c75-c3166d5adaa0",
+    "severity": "HIGH",
+    "title": "Public Cloud Bucket Exposed \u2014 S3",
+    "host": "kjsit.somaiya.edu.in",
+    "description": "The bucket 'edu' on S3 (http://edu.s3.amazonaws.com) is publicly accessible (HTTP 200). Anyone on the internet can read its contents.",
+    "action": "Immediately set the bucket ACL / policy to private. Audit its contents for sensitive data. Enable access logging and review who accessed it.",
+    "timestamp": "2026-04-18T15:46:28",
+    "source": "cloud",
+    "priority_tier": "P1",
+    "priority_score": 80,
+    "fix_efficiency": 12.0,
+    "_urgency_factors": {
+      "exploitability": 5,
+      "impact": 5,
+      "exposure": 5,
+      "privilege_potential": 2,
+      "asset_criticality": 2,
+      "evidence_confidence": 5
+    },
+    "remediation": {
+      "recommended_sla": "7 days",
+      "owner_category": "Infrastructure / CloudOps",
+      "effort_level": 2
+    }
+  },
+  {
+    "id": "fc8b533a-8679-44b9-83c6-0278c642ea5e",
+    "severity": "HIGH",
+    "title": "Bucket Directory Listing Enabled \u2014 S3",
+    "host": "kjsit.somaiya.edu.in",
+    "description": "Bucket 'edu' on S3 (http://edu.s3.amazonaws.com) has directory listing enabled \u2014 all stored objects can be enumerated. ",
+    "action": "Disable public listing on the bucket. Review listed objects for sensitive data and rotate any exposed credentials.",
+    "timestamp": "2026-04-18T15:46:28",
+    "source": "cloud",
+    "priority_tier": "P2",
+    "priority_score": 60,
+    "fix_efficiency": 9.0,
+    "_urgency_factors": {
+      "exploitability": 5,
+      "impact": 5,
+      "exposure": 1,
+      "privilege_potential": 2,
+      "asset_criticality": 2,
+      "evidence_confidence": 3
+    },
+    "remediation": {
+      "recommended_sla": "30 days",
+      "owner_category": "Infrastructure / CloudOps",
+      "effort_level": 2
+    }
+  },
+  {
+    "id": "8a172abf-0936-463e-9e7f-9da779276ca7",
+    "severity": "MEDIUM",
+    "title": "Port 80 Open \u2014 HTTP",
+    "host": "kjsit.somaiya.edu.in",
+    "description": "Port 80/tcp (http) is open on kjsit.somaiya.edu.in. HTTP \u2014 unencrypted web traffic. Verify this is intentionally public.",
+    "action": "Confirm port 80 is intentionally internet-facing. Ensure the service is up to date and properly configured.",
+    "timestamp": "2026-04-18T15:45:48",
+    "source": "nmap",
+    "port": 80,
+    "priority_tier": "P2",
+    "priority_score": 50,
+    "fix_efficiency": 7.5,
+    "_urgency_factors": {
+      "exploitability": 1,
+      "impact": 1,
+      "exposure": 5,
+      "privilege_potential": 2,
+      "asset_criticality": 2,
+      "evidence_confidence": 4
+    },
+    "remediation": {
+      "recommended_sla": "30 days",
+      "owner_category": "Network / ITOps",
+      "effort_level": 2
+    }
+  },
+  {
+    "id": "7b487cad-62ef-4c4c-b497-f6855888b08e",
+    "severity": "MEDIUM",
+    "title": "Port 443 Open \u2014 HTTPS",
+    "host": "kjsit.somaiya.edu.in",
+    "description": "Port 443/tcp (https) is open on kjsit.somaiya.edu.in. HTTPS \u2014 encrypted web traffic. Verify this is intentionally public.",
+    "action": "Confirm port 443 is intentionally internet-facing. Ensure the service is up to date and properly configured.",
+    "timestamp": "2026-04-18T15:45:48",
+    "source": "nmap",
+    "port": 443,
+    "priority_tier": "P2",
+    "priority_score": 50,
+    "fix_efficiency": 7.5,
+    "_urgency_factors": {
+      "exploitability": 1,
+      "impact": 1,
+      "exposure": 5,
+      "privilege_potential": 2,
+      "asset_criticality": 2,
+      "evidence_confidence": 4
+    },
+    "remediation": {
+      "recommended_sla": "30 days",
+      "owner_category": "Network / ITOps",
+      "effort_level": 2
+    }
+  }
+]

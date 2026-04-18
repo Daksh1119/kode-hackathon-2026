@@ -1,24 +1,54 @@
 [
   {
-    "id": "7583df82-2af8-4d26-a899-7949bdfa9135",
-    "severity": "HIGH",
-    "title": "CKFinder - Unauthenticated Exposure",
+    "id": "97a7d82c-e5a2-4911-b798-164e7010dadb",
+    "severity": "MEDIUM",
+    "title": "Open Directory Listing on Web Server \u2014 /assets/",
     "host": "somaiya.com",
-    "description": "Nuclei detected 'CKFinder - Unauthenticated Exposure' on somaiya.com. Template: unauth-ckfinder. Matched at: https://somaiya.com/ckfinder/ckfinder.html",
-    "action": "Review the Nuclei finding and apply the relevant patch or configuration fix. Consult the template documentation at https://nuclei.projectdiscovery.io for remediation guidance on 'unauth-ckfinder'.",
-    "timestamp": "2026-04-18T10:18:17",
-    "source": "nuclei",
-    "template": "unauth-ckfinder"
+    "description": "Directory listing is enabled at https://somaiya.com/assets/ on the web server. Files in this directory are publicly browsable. Sample files: apps/, bootstrap-submenu.min.js, captcha/, ckeditor/, ckeditor_edu/.",
+    "action": "Disable directory listing in your web server configuration (Apache: Options -Indexes; Nginx: remove autoindex on). Audit the directory for sensitive files.",
+    "timestamp": "2026-04-18T17:57:54",
+    "source": "cloud",
+    "priority_tier": "P1",
+    "priority_score": 67,
+    "fix_efficiency": 10.0,
+    "_urgency_factors": {
+      "exploitability": 5,
+      "impact": 1,
+      "exposure": 5,
+      "privilege_potential": 2,
+      "asset_criticality": 2,
+      "evidence_confidence": 5
+    },
+    "remediation": {
+      "recommended_sla": "7 days",
+      "owner_category": "Infrastructure / CloudOps",
+      "effort_level": 2
+    }
   },
   {
-    "id": "090f87a8-2a43-4cef-a656-b6a49bcdeb07",
-    "severity": "HIGH",
-    "title": "CKFinder - Unauthenticated Exposure",
+    "id": "df89b525-43d5-4838-af9f-e0b2cc4322de",
+    "severity": "MEDIUM",
+    "title": "Open Directory Listing on Subdomain \u2014 /assets/",
     "host": "www.somaiya.com",
-    "description": "Nuclei detected 'CKFinder - Unauthenticated Exposure' on www.somaiya.com. Template: unauth-ckfinder. Matched at: https://www.somaiya.com/ckfinder/ckfinder.html",
-    "action": "Review the Nuclei finding and apply the relevant patch or configuration fix. Consult the template documentation at https://nuclei.projectdiscovery.io for remediation guidance on 'unauth-ckfinder'.",
-    "timestamp": "2026-04-18T10:18:17",
-    "source": "nuclei",
-    "template": "unauth-ckfinder"
+    "description": "Directory listing is enabled at https://www.somaiya.com/assets/. Files in this path are publicly browsable. Sample files: apps/, bootstrap-submenu.min.js, captcha/, ckeditor/, ckeditor_edu/.",
+    "action": "Disable directory listing in your web server config. Audit the exposed path for credentials, backups, or config files.",
+    "timestamp": "2026-04-18T17:57:58",
+    "source": "cloud",
+    "priority_tier": "P1",
+    "priority_score": 67,
+    "fix_efficiency": 10.0,
+    "_urgency_factors": {
+      "exploitability": 5,
+      "impact": 1,
+      "exposure": 5,
+      "privilege_potential": 2,
+      "asset_criticality": 2,
+      "evidence_confidence": 5
+    },
+    "remediation": {
+      "recommended_sla": "7 days",
+      "owner_category": "Infrastructure / CloudOps",
+      "effort_level": 2
+    }
   }
 ]

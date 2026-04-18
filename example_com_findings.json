@@ -1,12 +1,12 @@
 [
   {
-    "id": "f7886fa9-1c4e-4167-ab21-259f56aee058",
+    "id": "c4a2ed78-a78d-4ac3-8ce0-6e013a23e37f",
     "severity": "HIGH",
     "title": "Public Cloud Bucket Exposed \u2014 S3",
-    "host": "hiranandani.com",
-    "description": "The bucket 'hiranandani' on S3 (http://hiranandani.s3.amazonaws.com) is publicly accessible (HTTP 200). Anyone on the internet can read its contents.",
+    "host": "example.com",
+    "description": "The bucket 'example-files' on S3 (http://example-files.s3.amazonaws.com) is publicly accessible (HTTP 200). Anyone on the internet can read its contents.",
     "action": "Immediately set the bucket ACL / policy to private. Audit its contents for sensitive data. Enable access logging and review who accessed it.",
-    "timestamp": "2026-04-18T20:59:14",
+    "timestamp": "2026-04-18T20:29:03",
     "source": "cloud",
     "priority_tier": "P1",
     "priority_score": 80,
@@ -26,23 +26,23 @@
     }
   },
   {
-    "id": "904a28fb-6bdc-4964-9766-05c0a58e429f",
+    "id": "e6f1b99a-f33f-47c4-8ab4-8c2748a1f5af",
     "severity": "HIGH",
     "title": "Bucket Directory Listing Enabled \u2014 S3",
-    "host": "hiranandani.com",
-    "description": "Bucket 'hiranandani' on S3 (http://hiranandani.s3.amazonaws.com) has directory listing enabled \u2014 all stored objects can be enumerated. Sample objects: 09augmiddle.jpg, 123.jpg, 12juneomr.jpg, 29may_deven.jpg, 29may_omr.jpg.",
+    "host": "example.com",
+    "description": "Bucket 'example-files' on S3 (http://example-files.s3.amazonaws.com) has directory listing enabled \u2014 all stored objects can be enumerated. Sample objects: gabriel-beaudry-93842.jpg, luca-bravo-204056.jpg, samples/, samples/China Central V4.wav, samples/Clap Magnum 1.wav.",
     "action": "Disable public listing on the bucket. Review listed objects for sensitive data and rotate any exposed credentials.",
-    "timestamp": "2026-04-18T20:59:14",
+    "timestamp": "2026-04-18T20:29:03",
     "source": "cloud",
     "priority_tier": "P2",
-    "priority_score": 63,
-    "fix_efficiency": 9.5,
+    "priority_score": 60,
+    "fix_efficiency": 9.0,
     "_urgency_factors": {
       "exploitability": 5,
       "impact": 5,
       "exposure": 1,
       "privilege_potential": 2,
-      "asset_criticality": 3,
+      "asset_criticality": 2,
       "evidence_confidence": 3
     },
     "remediation": {

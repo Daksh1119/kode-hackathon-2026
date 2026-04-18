@@ -1,0 +1,750 @@
+[
+  {
+    "id": "6922a3b4-6037-4ab5-9c84-c92698b0942a",
+    "severity": "HIGH",
+    "title": "Sensitive Port 21 Open \u2014 FTP",
+    "host": "acme.com",
+    "description": "Port 21/tcp (ftp) is publicly accessible on acme.com. FTP \u2014 cleartext file transfer. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 21 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T16:13:22",
+    "source": "nmap",
+    "port": 21,
+    "priority_tier": "P0",
+    "priority_score": 87,
+    "fix_efficiency": 13.0,
+    "_urgency_factors": {
+      "exploitability": 5,
+      "impact": 5,
+      "exposure": 5,
+      "privilege_potential": 5,
+      "asset_criticality": 2,
+      "evidence_confidence": 4
+    },
+    "remediation": {
+      "recommended_sla": "24h",
+      "owner_category": "Network / ITOps",
+      "effort_level": 2
+    }
+  },
+  {
+    "id": "e97ca953-4e89-4f3e-99c4-34af02533742",
+    "severity": "HIGH",
+    "title": "Sensitive Port 25 Open \u2014 SMTP",
+    "host": "acme.com",
+    "description": "Port 25/tcp (smtp) is publicly accessible on acme.com. SMTP \u2014 mail relay. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 25 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T16:13:22",
+    "source": "nmap",
+    "port": 25,
+    "priority_tier": "P0",
+    "priority_score": 87,
+    "fix_efficiency": 13.0,
+    "_urgency_factors": {
+      "exploitability": 5,
+      "impact": 5,
+      "exposure": 5,
+      "privilege_potential": 5,
+      "asset_criticality": 2,
+      "evidence_confidence": 4
+    },
+    "remediation": {
+      "recommended_sla": "24h",
+      "owner_category": "Network / ITOps",
+      "effort_level": 2
+    }
+  },
+  {
+    "id": "447e239c-5e19-4edf-8d42-72f18a676c74",
+    "severity": "HIGH",
+    "title": "Sensitive Port 53 Open \u2014 DOMAIN",
+    "host": "acme.com",
+    "description": "Port 53/tcp (domain) is publicly accessible on acme.com. DNS \u2014 potentially open resolver. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 53 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T16:13:22",
+    "source": "nmap",
+    "port": 53,
+    "priority_tier": "P0",
+    "priority_score": 87,
+    "fix_efficiency": 13.0,
+    "_urgency_factors": {
+      "exploitability": 5,
+      "impact": 5,
+      "exposure": 5,
+      "privilege_potential": 5,
+      "asset_criticality": 2,
+      "evidence_confidence": 4
+    },
+    "remediation": {
+      "recommended_sla": "24h",
+      "owner_category": "Network / ITOps",
+      "effort_level": 2
+    }
+  },
+  {
+    "id": "6a89068f-53be-4c92-a301-ff6f35faffb6",
+    "severity": "HIGH",
+    "title": "Sensitive Port 21 Open \u2014 FTP",
+    "host": "mapper.acme.com",
+    "description": "Port 21/tcp (ftp) is publicly accessible on mapper.acme.com. FTP \u2014 cleartext file transfer. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 21 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T16:13:22",
+    "source": "nmap",
+    "port": 21,
+    "priority_tier": "P0",
+    "priority_score": 87,
+    "fix_efficiency": 13.0,
+    "_urgency_factors": {
+      "exploitability": 5,
+      "impact": 5,
+      "exposure": 5,
+      "privilege_potential": 5,
+      "asset_criticality": 2,
+      "evidence_confidence": 4
+    },
+    "remediation": {
+      "recommended_sla": "24h",
+      "owner_category": "Network / ITOps",
+      "effort_level": 2
+    }
+  },
+  {
+    "id": "82f0a839-fe25-4bf3-a174-5ad0c3c1d642",
+    "severity": "HIGH",
+    "title": "Sensitive Port 25 Open \u2014 SMTP",
+    "host": "mapper.acme.com",
+    "description": "Port 25/tcp (smtp) is publicly accessible on mapper.acme.com. SMTP \u2014 mail relay. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 25 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T16:13:22",
+    "source": "nmap",
+    "port": 25,
+    "priority_tier": "P0",
+    "priority_score": 87,
+    "fix_efficiency": 13.0,
+    "_urgency_factors": {
+      "exploitability": 5,
+      "impact": 5,
+      "exposure": 5,
+      "privilege_potential": 5,
+      "asset_criticality": 2,
+      "evidence_confidence": 4
+    },
+    "remediation": {
+      "recommended_sla": "24h",
+      "owner_category": "Network / ITOps",
+      "effort_level": 2
+    }
+  },
+  {
+    "id": "6963faac-adeb-4352-a8b9-efd955f90757",
+    "severity": "HIGH",
+    "title": "Sensitive Port 53 Open \u2014 DOMAIN",
+    "host": "mapper.acme.com",
+    "description": "Port 53/tcp (domain) is publicly accessible on mapper.acme.com. DNS \u2014 potentially open resolver. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 53 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T16:13:22",
+    "source": "nmap",
+    "port": 53,
+    "priority_tier": "P0",
+    "priority_score": 87,
+    "fix_efficiency": 13.0,
+    "_urgency_factors": {
+      "exploitability": 5,
+      "impact": 5,
+      "exposure": 5,
+      "privilege_potential": 5,
+      "asset_criticality": 2,
+      "evidence_confidence": 4
+    },
+    "remediation": {
+      "recommended_sla": "24h",
+      "owner_category": "Network / ITOps",
+      "effort_level": 2
+    }
+  },
+  {
+    "id": "11af98ea-c0c8-4160-b7cc-9ded05ac3408",
+    "severity": "HIGH",
+    "title": "Sensitive Port 21 Open \u2014 FTP",
+    "host": "mail.acme.com",
+    "description": "Port 21/tcp (ftp) is publicly accessible on mail.acme.com. FTP \u2014 cleartext file transfer. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 21 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T16:13:22",
+    "source": "nmap",
+    "port": 21,
+    "priority_tier": "P0",
+    "priority_score": 87,
+    "fix_efficiency": 13.0,
+    "_urgency_factors": {
+      "exploitability": 5,
+      "impact": 5,
+      "exposure": 5,
+      "privilege_potential": 5,
+      "asset_criticality": 2,
+      "evidence_confidence": 4
+    },
+    "remediation": {
+      "recommended_sla": "24h",
+      "owner_category": "Network / ITOps",
+      "effort_level": 2
+    }
+  },
+  {
+    "id": "a2644e48-4b37-4f0a-981a-842da9afb858",
+    "severity": "HIGH",
+    "title": "Sensitive Port 25 Open \u2014 SMTP",
+    "host": "mail.acme.com",
+    "description": "Port 25/tcp (smtp) is publicly accessible on mail.acme.com. SMTP \u2014 mail relay. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 25 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T16:13:22",
+    "source": "nmap",
+    "port": 25,
+    "priority_tier": "P0",
+    "priority_score": 87,
+    "fix_efficiency": 13.0,
+    "_urgency_factors": {
+      "exploitability": 5,
+      "impact": 5,
+      "exposure": 5,
+      "privilege_potential": 5,
+      "asset_criticality": 2,
+      "evidence_confidence": 4
+    },
+    "remediation": {
+      "recommended_sla": "24h",
+      "owner_category": "Network / ITOps",
+      "effort_level": 2
+    }
+  },
+  {
+    "id": "57a5c482-c540-48bc-8e7c-af6963be32d3",
+    "severity": "HIGH",
+    "title": "Sensitive Port 53 Open \u2014 DOMAIN",
+    "host": "mail.acme.com",
+    "description": "Port 53/tcp (domain) is publicly accessible on mail.acme.com. DNS \u2014 potentially open resolver. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 53 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T16:13:22",
+    "source": "nmap",
+    "port": 53,
+    "priority_tier": "P0",
+    "priority_score": 87,
+    "fix_efficiency": 13.0,
+    "_urgency_factors": {
+      "exploitability": 5,
+      "impact": 5,
+      "exposure": 5,
+      "privilege_potential": 5,
+      "asset_criticality": 2,
+      "evidence_confidence": 4
+    },
+    "remediation": {
+      "recommended_sla": "24h",
+      "owner_category": "Network / ITOps",
+      "effort_level": 2
+    }
+  },
+  {
+    "id": "4cea6957-bf94-4780-b103-76497f8fd6a7",
+    "severity": "HIGH",
+    "title": "Sensitive Port 21 Open \u2014 FTP",
+    "host": "www.acme.com",
+    "description": "Port 21/tcp (ftp) is publicly accessible on www.acme.com. FTP \u2014 cleartext file transfer. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 21 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T16:13:22",
+    "source": "nmap",
+    "port": 21,
+    "priority_tier": "P0",
+    "priority_score": 87,
+    "fix_efficiency": 13.0,
+    "_urgency_factors": {
+      "exploitability": 5,
+      "impact": 5,
+      "exposure": 5,
+      "privilege_potential": 5,
+      "asset_criticality": 2,
+      "evidence_confidence": 4
+    },
+    "remediation": {
+      "recommended_sla": "24h",
+      "owner_category": "Network / ITOps",
+      "effort_level": 2
+    }
+  },
+  {
+    "id": "a58bf737-9074-4047-a8e7-d6e274b93cda",
+    "severity": "HIGH",
+    "title": "Sensitive Port 25 Open \u2014 SMTP",
+    "host": "www.acme.com",
+    "description": "Port 25/tcp (smtp) is publicly accessible on www.acme.com. SMTP \u2014 mail relay. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 25 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T16:13:22",
+    "source": "nmap",
+    "port": 25,
+    "priority_tier": "P0",
+    "priority_score": 87,
+    "fix_efficiency": 13.0,
+    "_urgency_factors": {
+      "exploitability": 5,
+      "impact": 5,
+      "exposure": 5,
+      "privilege_potential": 5,
+      "asset_criticality": 2,
+      "evidence_confidence": 4
+    },
+    "remediation": {
+      "recommended_sla": "24h",
+      "owner_category": "Network / ITOps",
+      "effort_level": 2
+    }
+  },
+  {
+    "id": "a911a976-5120-488f-a16b-b44ced442f12",
+    "severity": "HIGH",
+    "title": "Sensitive Port 53 Open \u2014 DOMAIN",
+    "host": "www.acme.com",
+    "description": "Port 53/tcp (domain) is publicly accessible on www.acme.com. DNS \u2014 potentially open resolver. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 53 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T16:13:22",
+    "source": "nmap",
+    "port": 53,
+    "priority_tier": "P0",
+    "priority_score": 87,
+    "fix_efficiency": 13.0,
+    "_urgency_factors": {
+      "exploitability": 5,
+      "impact": 5,
+      "exposure": 5,
+      "privilege_potential": 5,
+      "asset_criticality": 2,
+      "evidence_confidence": 4
+    },
+    "remediation": {
+      "recommended_sla": "24h",
+      "owner_category": "Network / ITOps",
+      "effort_level": 2
+    }
+  },
+  {
+    "id": "1abbff42-5fd2-4137-a2a3-e438b3bfbf38",
+    "severity": "HIGH",
+    "title": "Sensitive Port 21 Open \u2014 FTP",
+    "host": "gate.acme.com",
+    "description": "Port 21/tcp (ftp) is publicly accessible on gate.acme.com. FTP \u2014 cleartext file transfer. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 21 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T16:13:22",
+    "source": "nmap",
+    "port": 21,
+    "priority_tier": "P0",
+    "priority_score": 87,
+    "fix_efficiency": 13.0,
+    "_urgency_factors": {
+      "exploitability": 5,
+      "impact": 5,
+      "exposure": 5,
+      "privilege_potential": 5,
+      "asset_criticality": 2,
+      "evidence_confidence": 4
+    },
+    "remediation": {
+      "recommended_sla": "24h",
+      "owner_category": "Network / ITOps",
+      "effort_level": 2
+    }
+  },
+  {
+    "id": "4e4346e7-75f7-46d7-a34a-7fd97647fa27",
+    "severity": "HIGH",
+    "title": "Sensitive Port 25 Open \u2014 SMTP",
+    "host": "gate.acme.com",
+    "description": "Port 25/tcp (smtp) is publicly accessible on gate.acme.com. SMTP \u2014 mail relay. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 25 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T16:13:22",
+    "source": "nmap",
+    "port": 25,
+    "priority_tier": "P0",
+    "priority_score": 87,
+    "fix_efficiency": 13.0,
+    "_urgency_factors": {
+      "exploitability": 5,
+      "impact": 5,
+      "exposure": 5,
+      "privilege_potential": 5,
+      "asset_criticality": 2,
+      "evidence_confidence": 4
+    },
+    "remediation": {
+      "recommended_sla": "24h",
+      "owner_category": "Network / ITOps",
+      "effort_level": 2
+    }
+  },
+  {
+    "id": "7810b639-7513-4da9-91bb-ba2230a5a2fb",
+    "severity": "HIGH",
+    "title": "Sensitive Port 53 Open \u2014 DOMAIN",
+    "host": "gate.acme.com",
+    "description": "Port 53/tcp (domain) is publicly accessible on gate.acme.com. DNS \u2014 potentially open resolver. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 53 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T16:13:22",
+    "source": "nmap",
+    "port": 53,
+    "priority_tier": "P0",
+    "priority_score": 87,
+    "fix_efficiency": 13.0,
+    "_urgency_factors": {
+      "exploitability": 5,
+      "impact": 5,
+      "exposure": 5,
+      "privilege_potential": 5,
+      "asset_criticality": 2,
+      "evidence_confidence": 4
+    },
+    "remediation": {
+      "recommended_sla": "24h",
+      "owner_category": "Network / ITOps",
+      "effort_level": 2
+    }
+  },
+  {
+    "id": "4a34a26e-a5cb-4c66-8270-638a084f1379",
+    "severity": "MEDIUM",
+    "title": "Open Directory Listing on Web Server \u2014 /.well-known/",
+    "host": "acme.com",
+    "description": "Directory listing is enabled at http://acme.com/.well-known/ on the web server. Files in this directory are publicly browsable. Sample files: /.well-known%2f./, /.well-known%2f../, /.well-known%2fwebfinger.",
+    "action": "Disable directory listing in your web server configuration (Apache: Options -Indexes; Nginx: remove autoindex on). Audit the directory for sensitive files.",
+    "timestamp": "2026-04-18T16:18:59",
+    "source": "cloud",
+    "priority_tier": "P1",
+    "priority_score": 67,
+    "fix_efficiency": 10.0,
+    "_urgency_factors": {
+      "exploitability": 5,
+      "impact": 1,
+      "exposure": 5,
+      "privilege_potential": 2,
+      "asset_criticality": 2,
+      "evidence_confidence": 5
+    },
+    "remediation": {
+      "recommended_sla": "7 days",
+      "owner_category": "Infrastructure / CloudOps",
+      "effort_level": 2
+    }
+  },
+  {
+    "id": "2bf4c8fa-6be2-4cb4-8255-4aa965a869e9",
+    "severity": "MEDIUM",
+    "title": "Open Directory Listing on Web Server \u2014 /tmp/",
+    "host": "acme.com",
+    "description": "Directory listing is enabled at http://acme.com/tmp/ on the web server. Files in this directory are publicly browsable.",
+    "action": "Disable directory listing in your web server configuration (Apache: Options -Indexes; Nginx: remove autoindex on). Audit the directory for sensitive files.",
+    "timestamp": "2026-04-18T16:18:59",
+    "source": "cloud",
+    "priority_tier": "P1",
+    "priority_score": 67,
+    "fix_efficiency": 10.0,
+    "_urgency_factors": {
+      "exploitability": 5,
+      "impact": 1,
+      "exposure": 5,
+      "privilege_potential": 2,
+      "asset_criticality": 2,
+      "evidence_confidence": 5
+    },
+    "remediation": {
+      "recommended_sla": "7 days",
+      "owner_category": "Infrastructure / CloudOps",
+      "effort_level": 2
+    }
+  },
+  {
+    "id": "250ee28e-cef6-400c-856f-0f777dbad7fe",
+    "severity": "MEDIUM",
+    "title": "Open Directory Listing on Subdomain \u2014 /.well-known/",
+    "host": "mapper.acme.com",
+    "description": "Directory listing is enabled at http://mapper.acme.com/.well-known/. Files in this path are publicly browsable. Sample files: /.well-known%2f./, /.well-known%2f../.",
+    "action": "Disable directory listing in your web server config. Audit the exposed path for credentials, backups, or config files.",
+    "timestamp": "2026-04-18T16:19:11",
+    "source": "cloud",
+    "priority_tier": "P1",
+    "priority_score": 67,
+    "fix_efficiency": 10.0,
+    "_urgency_factors": {
+      "exploitability": 5,
+      "impact": 1,
+      "exposure": 5,
+      "privilege_potential": 2,
+      "asset_criticality": 2,
+      "evidence_confidence": 5
+    },
+    "remediation": {
+      "recommended_sla": "7 days",
+      "owner_category": "Infrastructure / CloudOps",
+      "effort_level": 2
+    }
+  },
+  {
+    "id": "390c58aa-d4ea-46aa-b70c-a3fb057e9624",
+    "severity": "MEDIUM",
+    "title": "Open Directory Listing on Subdomain \u2014 /.well-known/",
+    "host": "mail.acme.com",
+    "description": "Directory listing is enabled at http://mail.acme.com/.well-known/. Files in this path are publicly browsable. Sample files: /.well-known%2f./, /.well-known%2f../.",
+    "action": "Disable directory listing in your web server config. Audit the exposed path for credentials, backups, or config files.",
+    "timestamp": "2026-04-18T16:19:24",
+    "source": "cloud",
+    "priority_tier": "P1",
+    "priority_score": 67,
+    "fix_efficiency": 10.0,
+    "_urgency_factors": {
+      "exploitability": 5,
+      "impact": 1,
+      "exposure": 5,
+      "privilege_potential": 2,
+      "asset_criticality": 2,
+      "evidence_confidence": 5
+    },
+    "remediation": {
+      "recommended_sla": "7 days",
+      "owner_category": "Infrastructure / CloudOps",
+      "effort_level": 2
+    }
+  },
+  {
+    "id": "60962763-4a9d-42db-8ca6-21ed25624cbf",
+    "severity": "MEDIUM",
+    "title": "Open Directory Listing on Subdomain \u2014 /.well-known/",
+    "host": "www.acme.com",
+    "description": "Directory listing is enabled at http://www.acme.com/.well-known/. Files in this path are publicly browsable. Sample files: /.well-known%2f./, /.well-known%2f../, /.well-known%2fwebfinger.",
+    "action": "Disable directory listing in your web server config. Audit the exposed path for credentials, backups, or config files.",
+    "timestamp": "2026-04-18T16:19:36",
+    "source": "cloud",
+    "priority_tier": "P1",
+    "priority_score": 67,
+    "fix_efficiency": 10.0,
+    "_urgency_factors": {
+      "exploitability": 5,
+      "impact": 1,
+      "exposure": 5,
+      "privilege_potential": 2,
+      "asset_criticality": 2,
+      "evidence_confidence": 5
+    },
+    "remediation": {
+      "recommended_sla": "7 days",
+      "owner_category": "Infrastructure / CloudOps",
+      "effort_level": 2
+    }
+  },
+  {
+    "id": "e3a9a6da-cc9d-47ca-8dcc-c4833885d405",
+    "severity": "MEDIUM",
+    "title": "Open Directory Listing on Subdomain \u2014 /tmp/",
+    "host": "www.acme.com",
+    "description": "Directory listing is enabled at http://www.acme.com/tmp/. Files in this path are publicly browsable.",
+    "action": "Disable directory listing in your web server config. Audit the exposed path for credentials, backups, or config files.",
+    "timestamp": "2026-04-18T16:19:36",
+    "source": "cloud",
+    "priority_tier": "P1",
+    "priority_score": 67,
+    "fix_efficiency": 10.0,
+    "_urgency_factors": {
+      "exploitability": 5,
+      "impact": 1,
+      "exposure": 5,
+      "privilege_potential": 2,
+      "asset_criticality": 2,
+      "evidence_confidence": 5
+    },
+    "remediation": {
+      "recommended_sla": "7 days",
+      "owner_category": "Infrastructure / CloudOps",
+      "effort_level": 2
+    }
+  },
+  {
+    "id": "4516f728-f852-4cf9-9afb-973e29eb3287",
+    "severity": "MEDIUM",
+    "title": "Open Directory Listing on Subdomain \u2014 /.well-known/",
+    "host": "gate.acme.com",
+    "description": "Directory listing is enabled at http://gate.acme.com/.well-known/. Files in this path are publicly browsable. Sample files: /.well-known%2f./, /.well-known%2f../, /.well-known%2fwebfinger.",
+    "action": "Disable directory listing in your web server config. Audit the exposed path for credentials, backups, or config files.",
+    "timestamp": "2026-04-18T16:19:49",
+    "source": "cloud",
+    "priority_tier": "P1",
+    "priority_score": 67,
+    "fix_efficiency": 10.0,
+    "_urgency_factors": {
+      "exploitability": 5,
+      "impact": 1,
+      "exposure": 5,
+      "privilege_potential": 2,
+      "asset_criticality": 2,
+      "evidence_confidence": 5
+    },
+    "remediation": {
+      "recommended_sla": "7 days",
+      "owner_category": "Infrastructure / CloudOps",
+      "effort_level": 2
+    }
+  },
+  {
+    "id": "339d48aa-558b-464b-b993-36952f3f72ce",
+    "severity": "MEDIUM",
+    "title": "Open Directory Listing on Subdomain \u2014 /tmp/",
+    "host": "gate.acme.com",
+    "description": "Directory listing is enabled at http://gate.acme.com/tmp/. Files in this path are publicly browsable.",
+    "action": "Disable directory listing in your web server config. Audit the exposed path for credentials, backups, or config files.",
+    "timestamp": "2026-04-18T16:19:49",
+    "source": "cloud",
+    "priority_tier": "P1",
+    "priority_score": 67,
+    "fix_efficiency": 10.0,
+    "_urgency_factors": {
+      "exploitability": 5,
+      "impact": 1,
+      "exposure": 5,
+      "privilege_potential": 2,
+      "asset_criticality": 2,
+      "evidence_confidence": 5
+    },
+    "remediation": {
+      "recommended_sla": "7 days",
+      "owner_category": "Infrastructure / CloudOps",
+      "effort_level": 2
+    }
+  },
+  {
+    "id": "7f56f174-5f44-4477-be3a-160a956062ee",
+    "severity": "MEDIUM",
+    "title": "Port 80 Open \u2014 HTTP",
+    "host": "acme.com",
+    "description": "Port 80/tcp (http) is open on acme.com. HTTP \u2014 unencrypted web traffic. Verify this is intentionally public.",
+    "action": "Confirm port 80 is intentionally internet-facing. Ensure the service is up to date and properly configured.",
+    "timestamp": "2026-04-18T16:13:22",
+    "source": "nmap",
+    "port": 80,
+    "priority_tier": "P2",
+    "priority_score": 50,
+    "fix_efficiency": 7.5,
+    "_urgency_factors": {
+      "exploitability": 1,
+      "impact": 1,
+      "exposure": 5,
+      "privilege_potential": 2,
+      "asset_criticality": 2,
+      "evidence_confidence": 4
+    },
+    "remediation": {
+      "recommended_sla": "30 days",
+      "owner_category": "Network / ITOps",
+      "effort_level": 2
+    }
+  },
+  {
+    "id": "f2608b0c-d634-491d-a4a9-f77b47802f4a",
+    "severity": "MEDIUM",
+    "title": "Port 80 Open \u2014 HTTP",
+    "host": "mapper.acme.com",
+    "description": "Port 80/tcp (http) is open on mapper.acme.com. HTTP \u2014 unencrypted web traffic. Verify this is intentionally public.",
+    "action": "Confirm port 80 is intentionally internet-facing. Ensure the service is up to date and properly configured.",
+    "timestamp": "2026-04-18T16:13:22",
+    "source": "nmap",
+    "port": 80,
+    "priority_tier": "P2",
+    "priority_score": 50,
+    "fix_efficiency": 7.5,
+    "_urgency_factors": {
+      "exploitability": 1,
+      "impact": 1,
+      "exposure": 5,
+      "privilege_potential": 2,
+      "asset_criticality": 2,
+      "evidence_confidence": 4
+    },
+    "remediation": {
+      "recommended_sla": "30 days",
+      "owner_category": "Network / ITOps",
+      "effort_level": 2
+    }
+  },
+  {
+    "id": "e1aba97b-dbb0-43a0-a50c-083ebf68cb47",
+    "severity": "MEDIUM",
+    "title": "Port 80 Open \u2014 HTTP",
+    "host": "mail.acme.com",
+    "description": "Port 80/tcp (http) is open on mail.acme.com. HTTP \u2014 unencrypted web traffic. Verify this is intentionally public.",
+    "action": "Confirm port 80 is intentionally internet-facing. Ensure the service is up to date and properly configured.",
+    "timestamp": "2026-04-18T16:13:22",
+    "source": "nmap",
+    "port": 80,
+    "priority_tier": "P2",
+    "priority_score": 50,
+    "fix_efficiency": 7.5,
+    "_urgency_factors": {
+      "exploitability": 1,
+      "impact": 1,
+      "exposure": 5,
+      "privilege_potential": 2,
+      "asset_criticality": 2,
+      "evidence_confidence": 4
+    },
+    "remediation": {
+      "recommended_sla": "30 days",
+      "owner_category": "Network / ITOps",
+      "effort_level": 2
+    }
+  },
+  {
+    "id": "dcce98f6-5598-490b-9f76-711f00934922",
+    "severity": "MEDIUM",
+    "title": "Port 80 Open \u2014 HTTP",
+    "host": "www.acme.com",
+    "description": "Port 80/tcp (http) is open on www.acme.com. HTTP \u2014 unencrypted web traffic. Verify this is intentionally public.",
+    "action": "Confirm port 80 is intentionally internet-facing. Ensure the service is up to date and properly configured.",
+    "timestamp": "2026-04-18T16:13:22",
+    "source": "nmap",
+    "port": 80,
+    "priority_tier": "P2",
+    "priority_score": 50,
+    "fix_efficiency": 7.5,
+    "_urgency_factors": {
+      "exploitability": 1,
+      "impact": 1,
+      "exposure": 5,
+      "privilege_potential": 2,
+      "asset_criticality": 2,
+      "evidence_confidence": 4
+    },
+    "remediation": {
+      "recommended_sla": "30 days",
+      "owner_category": "Network / ITOps",
+      "effort_level": 2
+    }
+  },
+  {
+    "id": "5bddcfee-6b5c-4965-a3d5-49a66579af41",
+    "severity": "MEDIUM",
+    "title": "Port 80 Open \u2014 HTTP",
+    "host": "gate.acme.com",
+    "description": "Port 80/tcp (http) is open on gate.acme.com. HTTP \u2014 unencrypted web traffic. Verify this is intentionally public.",
+    "action": "Confirm port 80 is intentionally internet-facing. Ensure the service is up to date and properly configured.",
+    "timestamp": "2026-04-18T16:13:22",
+    "source": "nmap",
+    "port": 80,
+    "priority_tier": "P2",
+    "priority_score": 50,
+    "fix_efficiency": 7.5,
+    "_urgency_factors": {
+      "exploitability": 1,
+      "impact": 1,
+      "exposure": 5,
+      "privilege_potential": 2,
+      "asset_criticality": 2,
+      "evidence_confidence": 4
+    },
+    "remediation": {
+      "recommended_sla": "30 days",
+      "owner_category": "Network / ITOps",
+      "effort_level": 2
+    }
+  }
+]

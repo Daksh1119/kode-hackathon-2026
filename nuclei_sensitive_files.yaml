@@ -1,0 +1,111 @@
+id: shadowit-sensitive-files-exposure
+
+info:
+  name: Exposed Sensitive Files and Backups
+  author: github-copilot
+  severity: high
+  description: Detects common sensitive files, backup artifacts, and configuration files exposed on public subdomains.
+  tags: exposure,file,misconfig,secret,backup
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/.env"
+      - "{{BaseURL}}/.env.local"
+      - "{{BaseURL}}/.env.production"
+      - "{{BaseURL}}/.env.backup"
+      - "{{BaseURL}}/.env.bak"
+      - "{{BaseURL}}/.aws/credentials"
+      - "{{BaseURL}}/.npmrc"
+      - "{{BaseURL}}/credentials.json"
+      - "{{BaseURL}}/service-account.json"
+      - "{{BaseURL}}/secret.json"
+      - "{{BaseURL}}/config.php"
+      - "{{BaseURL}}/wp-config.php"
+      - "{{BaseURL}}/web.config"
+      - "{{BaseURL}}/private.key"
+      - "{{BaseURL}}/id_rsa"
+    redirects: true
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        part: body
+        words:
+          - "DB_PASSWORD"
+          - "DB_NAME"
+          - "DB_USER"
+          - "DATABASE_URL"
+          - "AWS_ACCESS_KEY_ID"
+          - "AWS_SECRET_ACCESS_KEY"
+          - "APP_KEY"
+          - "MAIL_PASSWORD"
+          - "REDIS_PASSWORD"
+          - "PRIVATE KEY"
+          - "BEGIN RSA PRIVATE KEY"
+          - "BEGIN OPENSSH PRIVATE KEY"
+          - "client_secret"
+          - "secret="
+          - "password="
+          - "token="
+          - "_authToken"
+          - "service_account"
+          - "AuthUserFile"
+          - "<configuration>"
+          - "<?xml"
+          - "connectionStrings"
+          - "spring.datasource"
+          - "<?php"
+
+  - method: GET
+    path:
+      - "{{BaseURL}}/.git/config"
+      - "{{BaseURL}}/.git/HEAD"
+      - "{{BaseURL}}/.svn/entries"
+      - "{{BaseURL}}/.hg/hgrc"
+    redirects: true
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        part: body
+        words:
+          - "[core]"
+          - "repositoryformatversion"
+          - "ref: refs/heads"
+          - "svn"
+          - "node-id"
+
+  - method: GET
+    path:
+      - "{{BaseURL}}/backup.sql"
+      - "{{BaseURL}}/dump.sql"
+      - "{{BaseURL}}/database.sql"
+      - "{{BaseURL}}/site.sql"
+      - "{{BaseURL}}/db.sql"
+      - "{{BaseURL}}/backup.zip"
+      - "{{BaseURL}}/backup.tar.gz"
+      - "{{BaseURL}}/backup.tgz"
+      - "{{BaseURL}}/backup.bak"
+      - "{{BaseURL}}/backup.old"
+      - "{{BaseURL}}/database.backup"
+      - "{{BaseURL}}/db.dump"
+      - "{{BaseURL}}/site.backup"
+    redirects: true
+    matchers-condition: or
+    matchers:
+      - type: word
+        part: body
+        words:
+          - "create table"
+          - "insert into"
+          - "dump completed"
+          - "mysql dump"
+          - "pg_dump"
+      - type: dsl
+        dsl:
+          - status_code == 200 && !contains(tolower(all_headers), "content-type: text/html")

@@ -1,0 +1,322 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+:root {
+  /* === Backgrounds === */
+  --bg:           #0A0E1A;
+  --surface:      #101623;
+  --elevated:     #181F2E;
+  --bg-void:      #0A0E1A;
+  --bg-surface:   #101623;
+  --bg-elevated:  #181F2E;
+  --bg-glass:     rgba(10, 14, 26, 0.82);
+
+  /* === Borders === */
+  --border:         rgba(255, 255, 255, 0.07);
+  --border-hover:   rgba(255, 255, 255, 0.13);
+  --border-subtle:  rgba(255, 255, 255, 0.05);
+  --border-active:  rgba(255, 255, 255, 0.14);
+
+  /* === Brand / Accent (Neon Blue) === */
+  --accent:        #00E5FF;
+  --accent-bg:     rgba(0, 229, 255, 0.08);
+  --accent-dim:    rgba(0, 229, 255, 0.10);
+  --accent-glow:   rgba(0, 229, 255, 0.35);
+
+  /* === Blue Accent (re-mapped from green) === */
+  --green-accent:       #00E5FF;
+  --green-accent-dim:   rgba(0, 229, 255, 0.12);
+  --green-accent-glow:  rgba(0, 229, 255, 0.22);
+  --green-soft:         #00E5FF;
+
+  /* === Severity (colour-coded) === */
+  --critical:      #FF3B5C;
+  --critical-glow: rgba(255, 59, 92, 0.28);
+  --high:          #FF7043;
+  --high-glow:     rgba(255, 112, 67, 0.22);
+  --medium:        #FFB300;
+  --medium-glow:   rgba(255, 179, 0, 0.22);
+  --low:           #00E5FF;
+  --low-glow:      rgba(0, 229, 255, 0.22);
+  --info:          #3B82F6;
+  --info-glow:     rgba(59, 130, 246, 0.20);
+
+  /* === Text === */
+  --text:           #E8EDF5;
+  --text-2:         #8A9BB5;
+  --text-3:         #4A5568;
+  --mono:           #00E5FF;
+  --text-primary:   #E8EDF5;
+  --text-secondary: #8A9BB5;
+  --text-muted:     #4A5568;
+  --text-terminal:  #00E5FF;
+
+  /* === SideNav (Apple-glass-style) === */
+  --sidenav-bg:        rgba(16, 22, 35, 0.92);
+  --sidenav-hover-bg:  rgba(255, 255, 255, 0.045);
+  --sidenav-active-bg: rgba(0, 229, 255, 0.1);
+
+  /* === Typography === */
+  --font-display:   'Outfit', sans-serif;
+  --font-body:      'Outfit', sans-serif;
+  --font-mono:      'JetBrains Mono', monospace;
+  --font-terminal:  'JetBrains Mono', monospace;
+
+  /* === Font sizes === */
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.25rem;
+  --text-2xl:  2rem;
+  --text-3xl:  2.625rem;
+
+  /* === Radii === */
+  --radius-sm:  6px;
+  --radius-md:  10px;
+  --radius-lg:  14px;
+  --radius-xl:  18px;
+
+  /* === Layout === */
+  --max-width:  1380px;
+  --sidebar-w:  220px;
+  --drawer-w:   440px;
+
+  /* === Easing === */
+  --ease-sharp:  cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* === Duration === */
+  --duration-fast:   140ms;
+  --duration-base:   240ms;
+  --duration-slow:   400ms;
+}
+
+/* ─── Reset ─── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar          { width: 5px; height: 5px; }
+::-webkit-scrollbar-track    { background: transparent; }
+::-webkit-scrollbar-thumb    {
+  background: rgba(0, 229, 255, 0.18);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover { background: rgba(0, 229, 255, 0.35); }
+
+/* ─── Selection ─── */
+::selection {
+  background: var(--green-accent-dim);
+  color: var(--text-primary);
+}
+
+/* ─── Keyframes ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes tabFadeIn {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
+}
+
+@keyframes slideOutRight {
+  from { transform: translateX(0); }
+  to   { transform: translateX(100%); }
+}
+
+@keyframes logEntry {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Critical pulse — red */
+@keyframes criticalPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 59, 92, 0.4); }
+  50%       { box-shadow: 0 0 0 7px rgba(255, 59, 92, 0); }
+}
+
+/* High pulse — orange */
+@keyframes highPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 112, 67, 0.35); }
+  50%       { box-shadow: 0 0 0 6px rgba(255, 112, 67, 0); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.5; }
+  50%       { opacity: 1; }
+}
+
+@keyframes progressGlow {
+  0%   { box-shadow: 0 0 4px var(--green-accent), 0 0 8px var(--green-accent-glow); }
+  50%  { box-shadow: 0 0 8px var(--green-accent), 0 0 16px var(--green-accent-glow); }
+  100% { box-shadow: 0 0 4px var(--green-accent), 0 0 8px var(--green-accent-glow); }
+}
+
+@keyframes pop {
+  from { transform: scale(0.7); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+/* ─── Utility Classes ─── */
+.font-display { font-family: var(--font-display); }
+.font-body    { font-family: var(--font-body); }
+.font-mono    { font-family: var(--font-mono); }
+.text-accent  { color: var(--accent); }
+.text-green   { color: var(--green-accent); }
+
+/* ─── Severity Badges — colour-coded ─── */
+.severity-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  animation: pop 0.3s var(--ease-bounce) both;
+}
+
+.severity-badge.critical {
+  color: #FF3B5C;
+  background: rgba(255, 59, 92, 0.14);
+  border: 1px solid rgba(255, 59, 92, 0.22);
+  animation: pop 0.3s var(--ease-bounce) both, criticalPulse 2.2s ease-in-out infinite;
+}
+.severity-badge.high {
+  color: #FF7043;
+  background: rgba(255, 112, 67, 0.13);
+  border: 1px solid rgba(255, 112, 67, 0.2);
+  animation: pop 0.3s var(--ease-bounce) both, highPulse 2.8s ease-in-out infinite;
+}
+.severity-badge.medium {
+  color: #FFB300;
+  background: rgba(255, 179, 0, 0.13);
+  border: 1px solid rgba(255, 179, 0, 0.2);
+}
+.severity-badge.low {
+  color: #00E5FF;
+  background: rgba(0, 229, 255, 0.1);
+  border: 1px solid rgba(0, 229, 255, 0.18);
+}
+.severity-badge.info {
+  color: #448AFF;
+  background: rgba(68, 138, 255, 0.12);
+  border: 1px solid rgba(68, 138, 255, 0.18);
+}
+
+/* ─── Source Badges ─── */
+.source-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 5px;
+  font-size: 10px;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.source-nmap   { color: #64B5F6; background: rgba(100, 181, 246, 0.12); }
+.source-cloud        { color: #4DD0E1; background: rgba(77, 208, 225, 0.12);  }
+.source-engine       { color: #CE93D8; background: rgba(206, 147, 216, 0.12); }
+.source-nuclei       { color: #FFAB40; background: rgba(255, 171, 64, 0.12);  }
+.source-dns          { color: #00E5FF; background: rgba(0, 229, 255, 0.12);  }
+.source-file_scanner { color: #FF3B5C; background: rgba(255, 59, 92, 0.12);  }
+
+/* ─── Table Row Reveal ─── */
+.table-row {
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.table-row.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ─── Apple-style Card Hover ─── */
+.apple-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  transition: border-color var(--duration-fast), box-shadow var(--duration-fast);
+}
+.apple-card:hover {
+  border-color: var(--border-hover);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* ─── Green Glow Accent Line (top Navbar stripe) ─── */
+.green-line {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--green-accent), transparent);
+  opacity: 0.35;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 1100px) {
+  :root {
+    --max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --drawer-w: 100%;
+  }
+}

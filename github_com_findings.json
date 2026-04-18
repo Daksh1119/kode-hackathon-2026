@@ -1,0 +1,87 @@
+[
+  {
+    "id": "07f9df60-721f-4cfc-9548-78c3a87f528a",
+    "severity": "HIGH",
+    "title": "Public Cloud Bucket Exposed \u2014 S3",
+    "host": "github.com",
+    "description": "The bucket 'github-files' on S3 (http://github-files.s3.amazonaws.com) is publicly accessible (HTTP 200). Anyone on the internet can read its contents.",
+    "action": "Immediately set the bucket ACL / policy to private. Audit its contents for sensitive data. Enable access logging and review who accessed it.",
+    "timestamp": "2026-04-18T19:14:09",
+    "source": "cloud",
+    "priority_tier": "P1",
+    "priority_score": 80,
+    "fix_efficiency": 12.0,
+    "_urgency_factors": {
+      "exploitability": 5,
+      "impact": 5,
+      "exposure": 5,
+      "privilege_potential": 2,
+      "asset_criticality": 2,
+      "evidence_confidence": 5
+    },
+    "remediation": {
+      "recommended_sla": "7 days",
+      "owner_category": "Infrastructure / CloudOps",
+      "effort_level": 2
+    }
+  },
+  {
+    "id": "42746b88-d1be-4ce2-8714-f08296d629c8",
+    "severity": "HIGH",
+    "title": "Bucket Directory Listing Enabled \u2014 S3",
+    "host": "github.com",
+    "description": "Bucket 'github-files' on S3 (http://github-files.s3.amazonaws.com) has directory listing enabled \u2014 all stored objects can be enumerated. ",
+    "action": "Disable public listing on the bucket. Review listed objects for sensitive data and rotate any exposed credentials.",
+    "timestamp": "2026-04-18T19:14:09",
+    "source": "cloud",
+    "priority_tier": "P2",
+    "priority_score": 60,
+    "fix_efficiency": 9.0,
+    "_urgency_factors": {
+      "exploitability": 5,
+      "impact": 5,
+      "exposure": 1,
+      "privilege_potential": 2,
+      "asset_criticality": 2,
+      "evidence_confidence": 3
+    },
+    "remediation": {
+      "recommended_sla": "30 days",
+      "owner_category": "Infrastructure / CloudOps",
+      "effort_level": 2
+    }
+  },
+  {
+    "id": "48554c63-00cc-4ca2-bf1b-8f783ccaec14",
+    "severity": "MEDIUM",
+    "title": "API Endpoint Publicly Exposed",
+    "host": "api.github.com",
+    "status": 403,
+    "status_label": "Access blocked (403)",
+    "description": "The subdomain 'api.github.com' exposes an API endpoint to the public internet. Unprotected API surfaces allow data extraction and abuse of business logic.",
+    "action": "Verify that authentication is required on all API routes. Add rate-limiting and request logging. Remove or gate any debug or internal-only endpoints.",
+    "timestamp": "2026-04-18T19:13:33",
+    "source": "engine",
+    "page_type": "unknown",
+    "page_title": "",
+    "page_signals": [
+      "host unreachable during page fetch"
+    ],
+    "priority_tier": "P2",
+    "priority_score": 47,
+    "fix_efficiency": 3.5,
+    "_urgency_factors": {
+      "exploitability": 1,
+      "impact": 1,
+      "exposure": 5,
+      "privilege_potential": 2,
+      "asset_criticality": 2,
+      "evidence_confidence": 3
+    },
+    "remediation": {
+      "recommended_sla": "30 days",
+      "owner_category": "AppSec / Dev Team",
+      "effort_level": 4
+    }
+  }
+]
