@@ -1,39 +1,237 @@
 [
   {
-    "id": "940517ae-2d7b-4ce0-a07c-bb8ebb0f48c7",
-    "severity": "MEDIUM",
-    "title": "Non-Production Environment Publicly Reachable",
-    "host": "beta.lodhagroup.com",
-    "status": 0,
-    "status_label": "DNS exists \u2014 HTTP unreachable",
-    "description": "The subdomain 'beta.lodhagroup.com' appears to be a development, staging, or test environment accessible from the internet. Non-production environments typically run older code, weaker security configurations, and may contain test credentials or real data copied from production. Note: this host did not respond to HTTP probing at scan time, but its DNS record exists \u2014 it may be intermittently available or firewall-gated.",
-    "action": "Move this environment behind VPN or an IP allowlist. Remove any test/default credentials. Ensure no real customer or production data is present in this environment.",
-    "timestamp": "2026-04-18T08:23:37"
+    "id": "ff3f7353-bfe1-40ad-90dc-ddfc0ddb7f2f",
+    "severity": "HIGH",
+    "title": "Sensitive Port 21 Open \u2014 FTP",
+    "host": "fb.lodhagroup.com",
+    "description": "Port 21/tcp (ftp) is publicly accessible on fb.lodhagroup.com. FTP \u2014 cleartext file transfer. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 21 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T10:33:00",
+    "source": "nmap",
+    "port": 21
   },
   {
-    "id": "4179577e-5d1b-4d3d-ab61-f3edfe6fc0ac",
-    "severity": "MEDIUM",
-    "title": "Non-Production Environment Publicly Reachable",
-    "host": "dev9.lodhagroup.com",
-    "status": 0,
-    "status_label": "DNS exists \u2014 HTTP unreachable",
-    "description": "The subdomain 'dev9.lodhagroup.com' appears to be a development, staging, or test environment accessible from the internet. Non-production environments typically run older code, weaker security configurations, and may contain test credentials or real data copied from production. Note: this host did not respond to HTTP probing at scan time, but its DNS record exists \u2014 it may be intermittently available or firewall-gated.",
-    "action": "Move this environment behind VPN or an IP allowlist. Remove any test/default credentials. Ensure no real customer or production data is present in this environment.",
-    "timestamp": "2026-04-18T08:23:37"
+    "id": "bd972704-c649-4bdc-b865-f3f3f0425cbf",
+    "severity": "HIGH",
+    "title": "Sensitive Port 25 Open \u2014 SMTP",
+    "host": "fb.lodhagroup.com",
+    "description": "Port 25/tcp (smtp) is publicly accessible on fb.lodhagroup.com. SMTP \u2014 mail relay. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 25 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T10:33:00",
+    "source": "nmap",
+    "port": 25
   },
   {
-    "id": "3f7757f5-5064-4eb2-b321-595a38a09ddb",
-    "severity": "MEDIUM",
-    "title": "Non-Production Environment Publicly Reachable",
-    "host": "lodhaeccdev.lodhagroup.com",
-    "status": 0,
-    "status_label": "DNS exists \u2014 HTTP unreachable",
-    "description": "The subdomain 'lodhaeccdev.lodhagroup.com' appears to be a development, staging, or test environment accessible from the internet. Non-production environments typically run older code, weaker security configurations, and may contain test credentials or real data copied from production. Note: this host did not respond to HTTP probing at scan time, but its DNS record exists \u2014 it may be intermittently available or firewall-gated.",
-    "action": "Move this environment behind VPN or an IP allowlist. Remove any test/default credentials. Ensure no real customer or production data is present in this environment.",
-    "timestamp": "2026-04-18T08:23:37"
+    "id": "d8bff1c3-39fc-4022-929b-b2fe13aa9097",
+    "severity": "HIGH",
+    "title": "Sensitive Port 53 Open \u2014 DOMAIN",
+    "host": "fb.lodhagroup.com",
+    "description": "Port 53/tcp (domain) is publicly accessible on fb.lodhagroup.com. DNS \u2014 potentially open resolver. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 53 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T10:33:00",
+    "source": "nmap",
+    "port": 53
   },
   {
-    "id": "684d6b0c-a3da-4370-8cf2-d061b53e5b37",
+    "id": "aa3d983f-6f28-4620-a061-ffb67b581406",
+    "severity": "HIGH",
+    "title": "Sensitive Port 21 Open \u2014 FTP",
+    "host": "lodhagroup.com",
+    "description": "Port 21/tcp (ftp) is publicly accessible on lodhagroup.com. FTP \u2014 cleartext file transfer. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 21 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T10:33:00",
+    "source": "nmap",
+    "port": 21
+  },
+  {
+    "id": "18074432-f6d8-46c0-9fa4-005614a903fa",
+    "severity": "HIGH",
+    "title": "Sensitive Port 25 Open \u2014 SMTP",
+    "host": "lodhagroup.com",
+    "description": "Port 25/tcp (smtp) is publicly accessible on lodhagroup.com. SMTP \u2014 mail relay. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 25 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T10:33:00",
+    "source": "nmap",
+    "port": 25
+  },
+  {
+    "id": "e574afb9-d96f-419f-bed5-164601bfda3b",
+    "severity": "HIGH",
+    "title": "Sensitive Port 53 Open \u2014 DOMAIN",
+    "host": "lodhagroup.com",
+    "description": "Port 53/tcp (domain) is publicly accessible on lodhagroup.com. DNS \u2014 potentially open resolver. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 53 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T10:33:00",
+    "source": "nmap",
+    "port": 53
+  },
+  {
+    "id": "7969dc69-4d35-4aff-98cb-0608ffae46a2",
+    "severity": "HIGH",
+    "title": "Sensitive Port 21 Open \u2014 FTP",
+    "host": "alibaug.lodhagroup.com",
+    "description": "Port 21/tcp (ftp) is publicly accessible on alibaug.lodhagroup.com. FTP \u2014 cleartext file transfer. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 21 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T10:33:00",
+    "source": "nmap",
+    "port": 21
+  },
+  {
+    "id": "94047522-53f4-4a65-aedf-36a9e90af2b1",
+    "severity": "HIGH",
+    "title": "Sensitive Port 25 Open \u2014 SMTP",
+    "host": "alibaug.lodhagroup.com",
+    "description": "Port 25/tcp (smtp) is publicly accessible on alibaug.lodhagroup.com. SMTP \u2014 mail relay. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 25 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T10:33:00",
+    "source": "nmap",
+    "port": 25
+  },
+  {
+    "id": "e6bef991-c48f-4ed5-8bba-87299ad5f0a5",
+    "severity": "HIGH",
+    "title": "Sensitive Port 53 Open \u2014 DOMAIN",
+    "host": "alibaug.lodhagroup.com",
+    "description": "Port 53/tcp (domain) is publicly accessible on alibaug.lodhagroup.com. DNS \u2014 potentially open resolver. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 53 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T10:33:00",
+    "source": "nmap",
+    "port": 53
+  },
+  {
+    "id": "67b279e7-0a45-4abb-b9a5-2f8c66447179",
+    "severity": "HIGH",
+    "title": "Sensitive Port 21 Open \u2014 FTP",
+    "host": "alumni.lodhagroup.com",
+    "description": "Port 21/tcp (ftp) is publicly accessible on alumni.lodhagroup.com. FTP \u2014 cleartext file transfer. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 21 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T10:33:00",
+    "source": "nmap",
+    "port": 21
+  },
+  {
+    "id": "2a69cbc0-6a66-4861-acaf-364e9053d8d9",
+    "severity": "HIGH",
+    "title": "Sensitive Port 25 Open \u2014 SMTP",
+    "host": "alumni.lodhagroup.com",
+    "description": "Port 25/tcp (smtp) is publicly accessible on alumni.lodhagroup.com. SMTP \u2014 mail relay. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 25 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T10:33:00",
+    "source": "nmap",
+    "port": 25
+  },
+  {
+    "id": "7fac2a01-4896-403f-94cb-d622e619e1a6",
+    "severity": "HIGH",
+    "title": "Sensitive Port 53 Open \u2014 DOMAIN",
+    "host": "alumni.lodhagroup.com",
+    "description": "Port 53/tcp (domain) is publicly accessible on alumni.lodhagroup.com. DNS \u2014 potentially open resolver. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 53 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T10:33:00",
+    "source": "nmap",
+    "port": 53
+  },
+  {
+    "id": "dd8eceb7-9df3-483f-8693-5b0ee24cb8ed",
+    "severity": "HIGH",
+    "title": "Sensitive Port 21 Open \u2014 FTP",
+    "host": "servicedesk.lodhagroup.com",
+    "description": "Port 21/tcp (ftp) is publicly accessible on servicedesk.lodhagroup.com. FTP \u2014 cleartext file transfer. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 21 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T10:33:00",
+    "source": "nmap",
+    "port": 21
+  },
+  {
+    "id": "f349f922-222b-491b-865f-67d6d5ce2985",
+    "severity": "HIGH",
+    "title": "Sensitive Port 25 Open \u2014 SMTP",
+    "host": "servicedesk.lodhagroup.com",
+    "description": "Port 25/tcp (smtp) is publicly accessible on servicedesk.lodhagroup.com. SMTP \u2014 mail relay. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 25 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T10:33:00",
+    "source": "nmap",
+    "port": 25
+  },
+  {
+    "id": "9614857a-5965-4684-94a7-2b63d45ab8b3",
+    "severity": "HIGH",
+    "title": "Sensitive Port 53 Open \u2014 DOMAIN",
+    "host": "servicedesk.lodhagroup.com",
+    "description": "Port 53/tcp (domain) is publicly accessible on servicedesk.lodhagroup.com. DNS \u2014 potentially open resolver. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 53 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T10:33:00",
+    "source": "nmap",
+    "port": 53
+  },
+  {
+    "id": "07652e35-5fe0-4a5e-9e59-3f7cc01b9697",
+    "severity": "HIGH",
+    "title": "Sensitive Port 21 Open \u2014 FTP",
+    "host": "golfview.lodhagroup.com",
+    "description": "Port 21/tcp (ftp) is publicly accessible on golfview.lodhagroup.com. FTP \u2014 cleartext file transfer. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 21 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T10:33:00",
+    "source": "nmap",
+    "port": 21
+  },
+  {
+    "id": "de0293ff-6a6d-48ca-9cb4-d79184615634",
+    "severity": "HIGH",
+    "title": "Sensitive Port 25 Open \u2014 SMTP",
+    "host": "golfview.lodhagroup.com",
+    "description": "Port 25/tcp (smtp) is publicly accessible on golfview.lodhagroup.com. SMTP \u2014 mail relay. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 25 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T10:33:00",
+    "source": "nmap",
+    "port": 25
+  },
+  {
+    "id": "17bead42-6534-4bd7-9a60-e140c47159ab",
+    "severity": "HIGH",
+    "title": "Sensitive Port 53 Open \u2014 DOMAIN",
+    "host": "golfview.lodhagroup.com",
+    "description": "Port 53/tcp (domain) is publicly accessible on golfview.lodhagroup.com. DNS \u2014 potentially open resolver. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 53 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T10:33:00",
+    "source": "nmap",
+    "port": 53
+  },
+  {
+    "id": "385dcd85-f10d-4945-a150-8d01f73b9574",
+    "severity": "HIGH",
+    "title": "Sensitive Port 21 Open \u2014 FTP",
+    "host": "www.lodhagroup.com",
+    "description": "Port 21/tcp (ftp) is publicly accessible on www.lodhagroup.com. FTP \u2014 cleartext file transfer. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 21 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T10:33:00",
+    "source": "nmap",
+    "port": 21
+  },
+  {
+    "id": "f54301dc-cf3f-4c09-83d2-2ee5f7bc2f97",
+    "severity": "HIGH",
+    "title": "Sensitive Port 25 Open \u2014 SMTP",
+    "host": "www.lodhagroup.com",
+    "description": "Port 25/tcp (smtp) is publicly accessible on www.lodhagroup.com. SMTP \u2014 mail relay. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 25 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T10:33:00",
+    "source": "nmap",
+    "port": 25
+  },
+  {
+    "id": "3d7c4a3e-3f3c-4975-a9f8-ebd403d066be",
+    "severity": "HIGH",
+    "title": "Sensitive Port 53 Open \u2014 DOMAIN",
+    "host": "www.lodhagroup.com",
+    "description": "Port 53/tcp (domain) is publicly accessible on www.lodhagroup.com. DNS \u2014 potentially open resolver. Sensitive services exposed to the internet are prime targets for brute-force, exploitation, and lateral movement.",
+    "action": "Immediately restrict port 53 to internal network or VPN only via firewall rules. If this service is not needed, disable it entirely.",
+    "timestamp": "2026-04-18T10:33:00",
+    "source": "nmap",
+    "port": 53
+  },
+  {
+    "id": "460ee604-0672-4277-8469-16399e3f385b",
     "severity": "MEDIUM",
     "title": "Non-Production Environment Publicly Reachable",
     "host": "email2caseuat.lodhagroup.com",
@@ -41,10 +239,50 @@
     "status_label": "DNS exists \u2014 HTTP unreachable",
     "description": "The subdomain 'email2caseuat.lodhagroup.com' appears to be a development, staging, or test environment accessible from the internet. Non-production environments typically run older code, weaker security configurations, and may contain test credentials or real data copied from production. Note: this host did not respond to HTTP probing at scan time, but its DNS record exists \u2014 it may be intermittently available or firewall-gated.",
     "action": "Move this environment behind VPN or an IP allowlist. Remove any test/default credentials. Ensure no real customer or production data is present in this environment.",
-    "timestamp": "2026-04-18T08:23:37"
+    "timestamp": "2026-04-18T10:32:54",
+    "source": "engine",
+    "page_type": "unknown",
+    "page_title": "",
+    "page_signals": [
+      "host unreachable"
+    ]
   },
   {
-    "id": "3b3593b2-99e1-4047-9583-74b482b5bd8a",
+    "id": "a014ba48-4ae3-407f-bb24-53a381643a89",
+    "severity": "MEDIUM",
+    "title": "Non-Production Environment Publicly Reachable",
+    "host": "dev9.lodhagroup.com",
+    "status": 0,
+    "status_label": "DNS exists \u2014 HTTP unreachable",
+    "description": "The subdomain 'dev9.lodhagroup.com' appears to be a development, staging, or test environment accessible from the internet. Non-production environments typically run older code, weaker security configurations, and may contain test credentials or real data copied from production. Note: this host did not respond to HTTP probing at scan time, but its DNS record exists \u2014 it may be intermittently available or firewall-gated.",
+    "action": "Move this environment behind VPN or an IP allowlist. Remove any test/default credentials. Ensure no real customer or production data is present in this environment.",
+    "timestamp": "2026-04-18T10:32:54",
+    "source": "engine",
+    "page_type": "unknown",
+    "page_title": "",
+    "page_signals": [
+      "host unreachable"
+    ]
+  },
+  {
+    "id": "109abac0-7c8f-4cce-a497-2f3e68877463",
+    "severity": "MEDIUM",
+    "title": "Non-Production Environment Publicly Reachable",
+    "host": "beta.lodhagroup.com",
+    "status": 0,
+    "status_label": "DNS exists \u2014 HTTP unreachable",
+    "description": "The subdomain 'beta.lodhagroup.com' appears to be a development, staging, or test environment accessible from the internet. Non-production environments typically run older code, weaker security configurations, and may contain test credentials or real data copied from production. Note: this host did not respond to HTTP probing at scan time, but its DNS record exists \u2014 it may be intermittently available or firewall-gated.",
+    "action": "Move this environment behind VPN or an IP allowlist. Remove any test/default credentials. Ensure no real customer or production data is present in this environment.",
+    "timestamp": "2026-04-18T10:32:54",
+    "source": "engine",
+    "page_type": "unknown",
+    "page_title": "",
+    "page_signals": [
+      "host unreachable"
+    ]
+  },
+  {
+    "id": "99283545-dd15-4919-93dd-701a836685d5",
     "severity": "MEDIUM",
     "title": "Non-Production Environment Publicly Reachable",
     "host": "lmsuat.lodhagroup.com",
@@ -52,17 +290,222 @@
     "status_label": "DNS exists \u2014 HTTP unreachable",
     "description": "The subdomain 'lmsuat.lodhagroup.com' appears to be a development, staging, or test environment accessible from the internet. Non-production environments typically run older code, weaker security configurations, and may contain test credentials or real data copied from production. Note: this host did not respond to HTTP probing at scan time, but its DNS record exists \u2014 it may be intermittently available or firewall-gated.",
     "action": "Move this environment behind VPN or an IP allowlist. Remove any test/default credentials. Ensure no real customer or production data is present in this environment.",
-    "timestamp": "2026-04-18T08:23:37"
+    "timestamp": "2026-04-18T10:32:54",
+    "source": "engine",
+    "page_type": "unknown",
+    "page_title": "",
+    "page_signals": [
+      "host unreachable"
+    ]
   },
   {
-    "id": "789370f1-efd8-4a16-84c5-74b42426fb73",
+    "id": "92b3ddef-bc16-468f-a4c1-2bb0dde739d3",
+    "severity": "MEDIUM",
+    "title": "Non-Production Environment Publicly Reachable",
+    "host": "lodhaeccdev.lodhagroup.com",
+    "status": 0,
+    "status_label": "DNS exists \u2014 HTTP unreachable",
+    "description": "The subdomain 'lodhaeccdev.lodhagroup.com' appears to be a development, staging, or test environment accessible from the internet. Non-production environments typically run older code, weaker security configurations, and may contain test credentials or real data copied from production. Note: this host did not respond to HTTP probing at scan time, but its DNS record exists \u2014 it may be intermittently available or firewall-gated.",
+    "action": "Move this environment behind VPN or an IP allowlist. Remove any test/default credentials. Ensure no real customer or production data is present in this environment.",
+    "timestamp": "2026-04-18T10:32:54",
+    "source": "engine",
+    "page_type": "unknown",
+    "page_title": "",
+    "page_signals": [
+      "host unreachable"
+    ]
+  },
+  {
+    "id": "43ef30f5-3ee6-4102-93bf-24fb7ea77b0e",
+    "severity": "MEDIUM",
+    "title": "Port 80 Open \u2014 HTTP",
+    "host": "fb.lodhagroup.com",
+    "description": "Port 80/tcp (http) is open on fb.lodhagroup.com. HTTP \u2014 unencrypted web traffic. Verify this is intentionally public.",
+    "action": "Confirm port 80 is intentionally internet-facing. Ensure the service is up to date and properly configured.",
+    "timestamp": "2026-04-18T10:33:00",
+    "source": "nmap",
+    "port": 80
+  },
+  {
+    "id": "14b1703c-cec2-48cd-aa15-98f66fbbe2ad",
+    "severity": "MEDIUM",
+    "title": "Port 443 Open \u2014 HTTPS",
+    "host": "fb.lodhagroup.com",
+    "description": "Port 443/tcp (https) is open on fb.lodhagroup.com. HTTPS \u2014 encrypted web traffic. Verify this is intentionally public.",
+    "action": "Confirm port 443 is intentionally internet-facing. Ensure the service is up to date and properly configured.",
+    "timestamp": "2026-04-18T10:33:00",
+    "source": "nmap",
+    "port": 443
+  },
+  {
+    "id": "32f85ac6-4e4e-47d6-9ebf-28752a6e273b",
+    "severity": "MEDIUM",
+    "title": "Port 80 Open \u2014 HTTP",
+    "host": "lodhagroup.com",
+    "description": "Port 80/tcp (http) is open on lodhagroup.com. HTTP \u2014 unencrypted web traffic. Verify this is intentionally public.",
+    "action": "Confirm port 80 is intentionally internet-facing. Ensure the service is up to date and properly configured.",
+    "timestamp": "2026-04-18T10:33:00",
+    "source": "nmap",
+    "port": 80
+  },
+  {
+    "id": "5f323b08-4a8d-4652-a43e-5fc00d38c540",
+    "severity": "MEDIUM",
+    "title": "Port 443 Open \u2014 HTTPS",
+    "host": "lodhagroup.com",
+    "description": "Port 443/tcp (https) is open on lodhagroup.com. HTTPS \u2014 encrypted web traffic. Verify this is intentionally public.",
+    "action": "Confirm port 443 is intentionally internet-facing. Ensure the service is up to date and properly configured.",
+    "timestamp": "2026-04-18T10:33:00",
+    "source": "nmap",
+    "port": 443
+  },
+  {
+    "id": "358de6a2-d47f-424d-b7b8-8afe602914fe",
+    "severity": "MEDIUM",
+    "title": "Port 80 Open \u2014 HTTP",
+    "host": "alibaug.lodhagroup.com",
+    "description": "Port 80/tcp (http) is open on alibaug.lodhagroup.com. HTTP \u2014 unencrypted web traffic. Verify this is intentionally public.",
+    "action": "Confirm port 80 is intentionally internet-facing. Ensure the service is up to date and properly configured.",
+    "timestamp": "2026-04-18T10:33:00",
+    "source": "nmap",
+    "port": 80
+  },
+  {
+    "id": "1f498d5c-fc9a-4c20-bc8e-7979d9cef7ab",
+    "severity": "MEDIUM",
+    "title": "Port 443 Open \u2014 HTTPS",
+    "host": "alibaug.lodhagroup.com",
+    "description": "Port 443/tcp (https) is open on alibaug.lodhagroup.com. HTTPS \u2014 encrypted web traffic. Verify this is intentionally public.",
+    "action": "Confirm port 443 is intentionally internet-facing. Ensure the service is up to date and properly configured.",
+    "timestamp": "2026-04-18T10:33:00",
+    "source": "nmap",
+    "port": 443
+  },
+  {
+    "id": "26739ec5-81ea-45f0-8c5d-dd0e4d8a54e2",
+    "severity": "MEDIUM",
+    "title": "Port 80 Open \u2014 HTTP",
+    "host": "alumni.lodhagroup.com",
+    "description": "Port 80/tcp (http) is open on alumni.lodhagroup.com. HTTP \u2014 unencrypted web traffic. Verify this is intentionally public.",
+    "action": "Confirm port 80 is intentionally internet-facing. Ensure the service is up to date and properly configured.",
+    "timestamp": "2026-04-18T10:33:00",
+    "source": "nmap",
+    "port": 80
+  },
+  {
+    "id": "cbffe8a0-c11c-4d66-846d-5e1ce27e8f3e",
+    "severity": "MEDIUM",
+    "title": "Port 443 Open \u2014 HTTPS",
+    "host": "alumni.lodhagroup.com",
+    "description": "Port 443/tcp (https) is open on alumni.lodhagroup.com. HTTPS \u2014 encrypted web traffic. Verify this is intentionally public.",
+    "action": "Confirm port 443 is intentionally internet-facing. Ensure the service is up to date and properly configured.",
+    "timestamp": "2026-04-18T10:33:00",
+    "source": "nmap",
+    "port": 443
+  },
+  {
+    "id": "21ad070c-3b64-4964-bca7-4bc3c5a10456",
+    "severity": "MEDIUM",
+    "title": "Port 80 Open \u2014 HTTP",
+    "host": "servicedesk.lodhagroup.com",
+    "description": "Port 80/tcp (http) is open on servicedesk.lodhagroup.com. HTTP \u2014 unencrypted web traffic. Verify this is intentionally public.",
+    "action": "Confirm port 80 is intentionally internet-facing. Ensure the service is up to date and properly configured.",
+    "timestamp": "2026-04-18T10:33:00",
+    "source": "nmap",
+    "port": 80
+  },
+  {
+    "id": "252a5ad7-216c-4d01-a5ad-fff6a89ee8d2",
+    "severity": "MEDIUM",
+    "title": "Port 443 Open \u2014 HTTPS",
+    "host": "servicedesk.lodhagroup.com",
+    "description": "Port 443/tcp (https) is open on servicedesk.lodhagroup.com. HTTPS \u2014 encrypted web traffic. Verify this is intentionally public.",
+    "action": "Confirm port 443 is intentionally internet-facing. Ensure the service is up to date and properly configured.",
+    "timestamp": "2026-04-18T10:33:00",
+    "source": "nmap",
+    "port": 443
+  },
+  {
+    "id": "e9cdab30-6af6-4211-a469-fe886d5d3c8d",
+    "severity": "MEDIUM",
+    "title": "Port 8080 Open \u2014 HTTP-PROXY",
+    "host": "servicedesk.lodhagroup.com",
+    "description": "Port 8080/tcp (http-proxy) is open on servicedesk.lodhagroup.com. HTTP alternate \u2014 often dev/proxy. Verify this is intentionally public.",
+    "action": "Confirm port 8080 is intentionally internet-facing. Ensure the service is up to date and properly configured.",
+    "timestamp": "2026-04-18T10:33:00",
+    "source": "nmap",
+    "port": 8080
+  },
+  {
+    "id": "4463ad04-8c0a-49e5-aa68-27bddeae5221",
+    "severity": "MEDIUM",
+    "title": "Port 8443 Open \u2014 HTTPS-ALT",
+    "host": "servicedesk.lodhagroup.com",
+    "description": "Port 8443/tcp (https-alt) is open on servicedesk.lodhagroup.com. HTTPS alternate \u2014 often dev/proxy. Verify this is intentionally public.",
+    "action": "Confirm port 8443 is intentionally internet-facing. Ensure the service is up to date and properly configured.",
+    "timestamp": "2026-04-18T10:33:00",
+    "source": "nmap",
+    "port": 8443
+  },
+  {
+    "id": "b2050ac9-2575-4340-ac8d-95b5282bf3c1",
+    "severity": "MEDIUM",
+    "title": "Port 80 Open \u2014 HTTP",
+    "host": "golfview.lodhagroup.com",
+    "description": "Port 80/tcp (http) is open on golfview.lodhagroup.com. HTTP \u2014 unencrypted web traffic. Verify this is intentionally public.",
+    "action": "Confirm port 80 is intentionally internet-facing. Ensure the service is up to date and properly configured.",
+    "timestamp": "2026-04-18T10:33:00",
+    "source": "nmap",
+    "port": 80
+  },
+  {
+    "id": "8073d4f1-a371-4600-b546-73a28638784a",
+    "severity": "MEDIUM",
+    "title": "Port 443 Open \u2014 HTTPS",
+    "host": "golfview.lodhagroup.com",
+    "description": "Port 443/tcp (https) is open on golfview.lodhagroup.com. HTTPS \u2014 encrypted web traffic. Verify this is intentionally public.",
+    "action": "Confirm port 443 is intentionally internet-facing. Ensure the service is up to date and properly configured.",
+    "timestamp": "2026-04-18T10:33:00",
+    "source": "nmap",
+    "port": 443
+  },
+  {
+    "id": "540bdeb2-fa3f-4ca5-b6c9-530a5512df30",
+    "severity": "MEDIUM",
+    "title": "Port 80 Open \u2014 HTTP",
+    "host": "www.lodhagroup.com",
+    "description": "Port 80/tcp (http) is open on www.lodhagroup.com. HTTP \u2014 unencrypted web traffic. Verify this is intentionally public.",
+    "action": "Confirm port 80 is intentionally internet-facing. Ensure the service is up to date and properly configured.",
+    "timestamp": "2026-04-18T10:33:00",
+    "source": "nmap",
+    "port": 80
+  },
+  {
+    "id": "e6fd3a3c-f5bb-4d84-80c4-dc6e9f7f1d7a",
+    "severity": "MEDIUM",
+    "title": "Port 443 Open \u2014 HTTPS",
+    "host": "www.lodhagroup.com",
+    "description": "Port 443/tcp (https) is open on www.lodhagroup.com. HTTPS \u2014 encrypted web traffic. Verify this is intentionally public.",
+    "action": "Confirm port 443 is intentionally internet-facing. Ensure the service is up to date and properly configured.",
+    "timestamp": "2026-04-18T10:33:00",
+    "source": "nmap",
+    "port": 443
+  },
+  {
+    "id": "c1bcf135-71b6-49cc-9eb2-e390ed80f760",
     "severity": "LOW",
     "title": "Restricted Endpoint Detected (Access Blocked)",
     "host": "servicedesk.lodhagroup.com",
     "status": 403,
     "status_label": "Access blocked (403)",
-    "description": "The subdomain 'servicedesk.lodhagroup.com' returned HTTP 403/401, meaning the service exists on the public internet but access is currently blocked. The asset is still part of your attack surface and may be exploitable if access controls change or are misconfigured.",
-    "action": "Verify that access controls are correctly configured and will not degrade over time. Document why this service is internet-facing. Consider restricting it to internal networks if it does not need to be public.",
-    "timestamp": "2026-04-18T08:23:37"
+    "description": "The subdomain 'servicedesk.lodhagroup.com' returned HTTP 403/401, meaning the service exists on the public internet but access is currently blocked. It is still part of your attack surface.",
+    "action": "Verify that access controls are correctly configured and will not degrade over time. Consider restricting it to internal networks if it does not need to be public.",
+    "timestamp": "2026-04-18T10:32:54",
+    "source": "engine",
+    "page_type": "unknown",
+    "page_title": "",
+    "page_signals": [
+      "host unreachable during page fetch"
+    ]
   }
 ]

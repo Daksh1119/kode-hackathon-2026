@@ -40,6 +40,8 @@ _NMAP_CANDIDATES = [
     "nmap",
 ]
 
+NUCLEI_PATH = r"C:\Users\daksh_769tz6y\go\bin\nuclei.exe"
+
 
 def _find_nmap() -> str:
     for candidate in _NMAP_CANDIDATES:
@@ -52,6 +54,8 @@ def _find_nmap() -> str:
 
 
 def _find_nuclei() -> str:
+    if Path(NUCLEI_PATH).is_file():
+        return NUCLEI_PATH
     return shutil.which("nuclei") or ""
 
 
@@ -140,25 +144,35 @@ def write_targets(hosts: list[str], path: str = "targets.txt") -> str:
 
 # ── Stage 4: Nmap ─────────────────────────────────────────────────────────────
 
+# Explicit port list — only the ports we actually classify as HIGH or MEDIUM.
+# Scanning 20 specific ports is ~5× faster than --top-ports 100.
+_FAST_PORTS = ",".join(str(p) for p in sorted(
+    list(HIGH_PORTS.keys()) + list(MEDIUM_PORTS.keys())
+))
+# e.g. "21,22,23,25,53,80,135,139,443,445,1433,1521,3306,3389,5432,5900,
+#        6379,8080,8443,8888,9200,9300,11211,27017"
+
+
 def run_nmap(
     targets_file: str = "targets.txt",
     output_xml:   str = "nmap.xml",
     scan_full:    bool = False,
+    demo_mode:    bool = False,
 ) -> bool:
     """
     Run Nmap against all targets.
 
-    Default (fast) mode — suitable for internet scanning:
-      -T4              aggressive timing
-      -Pn              skip host-discovery ping (treat all as online)
-      --top-ports 100  100 most common ports (~10× faster than 1000)
-      --host-timeout 30s  ← FIX: skip hosts that don't respond within 30 s
-      --max-retries 1     ← FIX: don't retry unresponsive ports
-      -oX              XML output for reliable parsing
+    Speed tiers:
+      demo  → scan only the 24 ports we classify, host-timeout 5s,  ~15-30s total
+      fast  → same port list, host-timeout 10s  (default)
+      full  → --top-ports 1000 + -sV,           host-timeout 30s   (--full-scan flag)
 
-    Full mode (scan_full=True) additionally adds:
-      -sV              service/version detection (slow but richer output)
-      --top-ports 1000
+    Key speed flags always present:
+      -T4              aggressive timing
+      -Pn              skip host-discovery (treat all as online)
+      --min-rate 2000  force ≥2000 pkts/s — biggest speed win on WAN
+      --max-retries 1  no port retries
+      --open           only report open ports (skip closed/filtered output)
     """
     nmap = _find_nmap()
     if not nmap:
@@ -169,24 +183,37 @@ def run_nmap(
         )
         return False
 
+    if scan_full:
+        port_args     = ["--top-ports", "1000"]
+        host_timeout  = "30s"
+        extra         = ["-sV", "--version-intensity", "0"]  # version detection, minimal intensity
+        proc_timeout  = 600
+    elif demo_mode:
+        port_args     = ["-p", _FAST_PORTS]
+        host_timeout  = "5s"
+        extra         = []
+        proc_timeout  = 60
+    else:
+        port_args     = ["-p", _FAST_PORTS]
+        host_timeout  = "10s"
+        extra         = []
+        proc_timeout  = 180
+
     cmd = [
         nmap,
         "-T4",
         "-Pn",
-        "--host-timeout", "30s",   # ← FIX: was missing; caused hangs
-        "--max-retries",  "1",      # ← FIX: was missing; caused slow retries
-        "--top-ports", "1000" if scan_full else "100",
+        "--min-rate",    "2000",       # force fast packet rate — biggest WAN speed win
+        "--max-retries", "1",          # no port retries
+        "--host-timeout", host_timeout,
+        "--open",                       # only show open ports — skips filtered noise
+        *extra,
+        *port_args,
         "-oX", output_xml,
         "-iL", targets_file,
     ]
 
-    if scan_full:
-        cmd.insert(4, "-sV")   # add service detection in full mode only
-
-    # Nmap timeout: 30s/host × targets + overhead.
-    # We cap at 5 min for typical runs; full scan can take longer.
-    timeout = 600 if scan_full else 300
-    return _run(cmd, "Nmap", timeout=timeout)
+    return _run(cmd, "Nmap", timeout=proc_timeout)
 
 
 def parse_nmap(xml_file: str = "nmap.xml") -> list[dict]:
@@ -319,15 +346,40 @@ def nmap_to_findings(nmap_data: list[dict]) -> list[dict]:
 
 # ── Stage 5: Nuclei ───────────────────────────────────────────────────────────
 
-def run_nuclei(targets_file: str = "targets.txt", output_json: str = "nuclei.jsonl") -> bool:
+# Templates scoped to fast, relevant categories only.
+# Avoids thousands of slow CVE / network templates that aren't useful for
+# attack-surface discovery.
+_NUCLEI_FAST_TAGS = "panel,exposure,misconfig,takeover,default-login,login,tech"
+
+# Tags to explicitly EXCLUDE — ssl/tls checks wait for TLS handshakes (slow)
+_NUCLEI_EXCLUDE_TAGS = "ssl,tls,dns,fuzzing,dos"
+
+
+def run_nuclei(
+    targets_file: str  = "targets.txt",
+    output_json:  str  = "nuclei.jsonl",
+    demo_mode:    bool = False,
+) -> bool:
     """
     Run Nuclei against HTTP-reachable targets.
 
-    FIX: Nuclei v3 dropped -json-export in favour of -o + implicit JSONL.
-    This function auto-detects the installed version and uses the right flags.
+    Speed fixes applied (every mode):
+      -no-interactsh       BIGGEST WIN — disables OOB/OAST callbacks that wait
+                           for DNS pingbacks (adds seconds of delay per template)
+      -timeout 5           5s per template request (default is 10s)
+      -rate-limit 150      150 req/s (default is much lower)
+      -bulk-size 50        process 50 hosts per template batch
+      -concurrency 50      run 50 templates in parallel
+      -etags ssl,tls,dns   skip slow network/crypto checks
+      -tags panel,...      only run fast discovery templates (not all CVEs)
 
-    Nuclei v2: nuclei -l targets -json-export out.json -severity ...
-    Nuclei v3: nuclei -l targets -o out.jsonl        -severity ...
+    demo_mode additionally:
+      -timeout 3           3s per template
+      -rate-limit 300      push req/s higher
+      -concurrency 100     max parallelism
+
+    subprocess timeout:
+      demo → 90s  |  normal → 300s  (was 1200s = 20 minutes!)
     """
     nuclei = _find_nuclei()
     if not nuclei:
@@ -338,38 +390,43 @@ def run_nuclei(targets_file: str = "targets.txt", output_json: str = "nuclei.jso
         )
         return False
 
-    # Detect version to choose correct output flag
+    # Detect v2 vs v3 to pick the right output flag
     try:
         ver_result = subprocess.run(
             [nuclei, "-version"],
             capture_output=True, text=True, timeout=10,
         )
         ver_output = ver_result.stdout + ver_result.stderr
-        # v3.x.x → use -o; v2.x.x → use -json-export
         is_v3 = "3." in ver_output
     except Exception:
-        is_v3 = False  # safe default — try v2 flags
+        is_v3 = True  # default to v3 (user confirmed v3.8.0)
+
+    per_template_timeout = "3" if demo_mode else "5"
+    rate_limit           = "300" if demo_mode else "150"
+    concurrency          = "100" if demo_mode else "50"
+    bulk_size            = "100" if demo_mode else "50"
+    proc_timeout         = 90   if demo_mode else 300   # was 1200!
+
+    # Flags common to both v2 and v3
+    common_speed_flags = [
+        "-no-interactsh",              # kills OOB wait time — biggest single win
+        "-timeout",    per_template_timeout,
+        "-rate-limit", rate_limit,
+        "-bulk-size",  bulk_size,
+        "-concurrency", concurrency,
+        "-tags",       _NUCLEI_FAST_TAGS,   # only run relevant template categories
+        "-etags",      _NUCLEI_EXCLUDE_TAGS, # skip slow ssl/tls/dns/fuzz templates
+        "-severity",   "critical,high,medium",
+        "-silent",
+        "-nc",
+    ]
 
     if is_v3:
-        # Nuclei v3: output is JSONL by default when -o is given
-        cmd = [
-            nuclei,
-            "-l",        targets_file,
-            "-o",        output_json,
-            "-severity", "critical,high,medium",
-            "-silent",
-            "-nc",
-        ]
+        cmd = [nuclei, "-l", targets_file, "-o", output_json, "-jsonl", *common_speed_flags]
     else:
-        # Nuclei v2
-        cmd = [
-            nuclei,
-            "-l",           targets_file,
-            "-json-export", output_json,
-            "-severity",    "critical,high,medium",
-            "-silent",
-            "-nc",
-        ]
+        cmd = [nuclei, "-l", targets_file, "-json-export", output_json, *common_speed_flags]
+
+    return _run(cmd, "Nuclei", timeout=proc_timeout)
 
     return _run(cmd, "Nuclei", timeout=1200)
 
@@ -488,7 +545,8 @@ def run_active_scan(
     scan_data:    list[dict],
     skip_nmap:    bool = False,
     skip_nuclei:  bool = False,
-    scan_full:    bool = False,         # pass True for -sV + top-1000 Nmap scan
+    scan_full:    bool = False,
+    demo_mode:    bool = False,         # hackathon/demo: tightest timeouts, fastest settings
     targets_file: str  = "targets.txt",
     nmap_xml:     str  = "nmap.xml",
     nuclei_json:  str  = "nuclei.jsonl",
@@ -496,14 +554,13 @@ def run_active_scan(
     """
     Run Stages 4 + 5 and return all findings.
 
-    Args:
-        scan_data:    Output of Stage 2 — list of {host, status}
-        skip_nmap:    Pass True to skip Nmap  (--no-nmap flag)
-        skip_nuclei:  Pass True to skip Nuclei (--no-nuclei flag)
-        scan_full:    Pass True for slower but richer Nmap scan (-sV, top-1000)
-
-    Returns:
-        Combined findings from Nmap + Nuclei (not yet deduplicated — caller does that).
+    Speed modes (fastest → slowest):
+      demo_mode=True   → Nmap 24 ports / 5s host-timeout / 60s cap
+                         Nuclei 3s/template, 300 req/s, 90s cap
+      default          → Nmap 24 ports / 10s host-timeout / 180s cap
+                         Nuclei 5s/template, 150 req/s, 300s cap
+      scan_full=True   → Nmap top-1000 + -sV / 30s host-timeout / 600s cap
+                         Nuclei same as default
     """
     all_targets  = [h["host"] for h in scan_data if h.get("status", 0) != 0]
     http_targets = [h["host"] for h in scan_data if 200 <= h.get("status", 0) < 400]
@@ -518,9 +575,8 @@ def run_active_scan(
 
     # ── Stage 4: Nmap ──
     if not skip_nmap:
-        nmap_ok = run_nmap(targets_file, nmap_xml, scan_full=scan_full)
+        nmap_ok = run_nmap(targets_file, nmap_xml, scan_full=scan_full, demo_mode=demo_mode)
         if nmap_ok or Path(nmap_xml).exists():
-            # Even if nmap returned non-zero (e.g. partial timeout), try to parse
             nmap_raw      = parse_nmap(nmap_xml)
             nmap_findings = nmap_to_findings(nmap_raw)
             all_findings.extend(nmap_findings)
@@ -534,7 +590,7 @@ def run_active_scan(
     if not skip_nuclei:
         if http_targets:
             write_targets(http_targets, targets_file)
-            nuclei_ok = run_nuclei(targets_file, nuclei_json)
+            nuclei_ok = run_nuclei(targets_file, nuclei_json, demo_mode=demo_mode)
             if nuclei_ok or Path(nuclei_json).exists():
                 nuclei_raw      = parse_nuclei(nuclei_json)
                 nuclei_findings = nuclei_to_findings(nuclei_raw)
