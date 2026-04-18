@@ -1,0 +1,68 @@
+[
+  {
+    "id": "940517ae-2d7b-4ce0-a07c-bb8ebb0f48c7",
+    "severity": "MEDIUM",
+    "title": "Non-Production Environment Publicly Reachable",
+    "host": "beta.lodhagroup.com",
+    "status": 0,
+    "status_label": "DNS exists \u2014 HTTP unreachable",
+    "description": "The subdomain 'beta.lodhagroup.com' appears to be a development, staging, or test environment accessible from the internet. Non-production environments typically run older code, weaker security configurations, and may contain test credentials or real data copied from production. Note: this host did not respond to HTTP probing at scan time, but its DNS record exists \u2014 it may be intermittently available or firewall-gated.",
+    "action": "Move this environment behind VPN or an IP allowlist. Remove any test/default credentials. Ensure no real customer or production data is present in this environment.",
+    "timestamp": "2026-04-18T08:23:37"
+  },
+  {
+    "id": "4179577e-5d1b-4d3d-ab61-f3edfe6fc0ac",
+    "severity": "MEDIUM",
+    "title": "Non-Production Environment Publicly Reachable",
+    "host": "dev9.lodhagroup.com",
+    "status": 0,
+    "status_label": "DNS exists \u2014 HTTP unreachable",
+    "description": "The subdomain 'dev9.lodhagroup.com' appears to be a development, staging, or test environment accessible from the internet. Non-production environments typically run older code, weaker security configurations, and may contain test credentials or real data copied from production. Note: this host did not respond to HTTP probing at scan time, but its DNS record exists \u2014 it may be intermittently available or firewall-gated.",
+    "action": "Move this environment behind VPN or an IP allowlist. Remove any test/default credentials. Ensure no real customer or production data is present in this environment.",
+    "timestamp": "2026-04-18T08:23:37"
+  },
+  {
+    "id": "3f7757f5-5064-4eb2-b321-595a38a09ddb",
+    "severity": "MEDIUM",
+    "title": "Non-Production Environment Publicly Reachable",
+    "host": "lodhaeccdev.lodhagroup.com",
+    "status": 0,
+    "status_label": "DNS exists \u2014 HTTP unreachable",
+    "description": "The subdomain 'lodhaeccdev.lodhagroup.com' appears to be a development, staging, or test environment accessible from the internet. Non-production environments typically run older code, weaker security configurations, and may contain test credentials or real data copied from production. Note: this host did not respond to HTTP probing at scan time, but its DNS record exists \u2014 it may be intermittently available or firewall-gated.",
+    "action": "Move this environment behind VPN or an IP allowlist. Remove any test/default credentials. Ensure no real customer or production data is present in this environment.",
+    "timestamp": "2026-04-18T08:23:37"
+  },
+  {
+    "id": "684d6b0c-a3da-4370-8cf2-d061b53e5b37",
+    "severity": "MEDIUM",
+    "title": "Non-Production Environment Publicly Reachable",
+    "host": "email2caseuat.lodhagroup.com",
+    "status": 0,
+    "status_label": "DNS exists \u2014 HTTP unreachable",
+    "description": "The subdomain 'email2caseuat.lodhagroup.com' appears to be a development, staging, or test environment accessible from the internet. Non-production environments typically run older code, weaker security configurations, and may contain test credentials or real data copied from production. Note: this host did not respond to HTTP probing at scan time, but its DNS record exists \u2014 it may be intermittently available or firewall-gated.",
+    "action": "Move this environment behind VPN or an IP allowlist. Remove any test/default credentials. Ensure no real customer or production data is present in this environment.",
+    "timestamp": "2026-04-18T08:23:37"
+  },
+  {
+    "id": "3b3593b2-99e1-4047-9583-74b482b5bd8a",
+    "severity": "MEDIUM",
+    "title": "Non-Production Environment Publicly Reachable",
+    "host": "lmsuat.lodhagroup.com",
+    "status": 0,
+    "status_label": "DNS exists \u2014 HTTP unreachable",
+    "description": "The subdomain 'lmsuat.lodhagroup.com' appears to be a development, staging, or test environment accessible from the internet. Non-production environments typically run older code, weaker security configurations, and may contain test credentials or real data copied from production. Note: this host did not respond to HTTP probing at scan time, but its DNS record exists \u2014 it may be intermittently available or firewall-gated.",
+    "action": "Move this environment behind VPN or an IP allowlist. Remove any test/default credentials. Ensure no real customer or production data is present in this environment.",
+    "timestamp": "2026-04-18T08:23:37"
+  },
+  {
+    "id": "789370f1-efd8-4a16-84c5-74b42426fb73",
+    "severity": "LOW",
+    "title": "Restricted Endpoint Detected (Access Blocked)",
+    "host": "servicedesk.lodhagroup.com",
+    "status": 403,
+    "status_label": "Access blocked (403)",
+    "description": "The subdomain 'servicedesk.lodhagroup.com' returned HTTP 403/401, meaning the service exists on the public internet but access is currently blocked. The asset is still part of your attack surface and may be exploitable if access controls change or are misconfigured.",
+    "action": "Verify that access controls are correctly configured and will not degrade over time. Document why this service is internet-facing. Consider restricting it to internal networks if it does not need to be public.",
+    "timestamp": "2026-04-18T08:23:37"
+  }
+]
