@@ -800,6 +800,9 @@ import time
 from urllib.request import urlopen, Request
 from urllib.error import URLError, HTTPError
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # ── Logging ───────────────────────────────────────────────────────────────────
 logging.basicConfig(
@@ -815,7 +818,7 @@ MAX_RETRIES = 3
 RETRY_CODES = {502, 503, 504}
 
 # Shodan API key — read from environment variable (set before running)
-SHODAN_API_KEY = os.environ.get("SHODAN_API_KEY", "WxRWjNPvqnFzkz9RLXKnGu9ZKb24VMeG")
+SHODAN_API_KEY = os.environ.get("SHODAN_API_KEY", "<YOUR_SHODAN_API_KEY_HERE>")
 
 SOURCES = {
     "crt.sh"    : "https://crt.sh/?q=%25.{domain}&output=json",
