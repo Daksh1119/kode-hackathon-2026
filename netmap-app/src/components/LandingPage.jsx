@@ -5,16 +5,16 @@ import { parseDomain, isValidDomain } from "../utils/domainParser";
 const SUGGESTIONS = ["hiranandani.com", "github.com", "google.com"];
 
 // ── Green accent for landing page only ───────────────────────────────────────
-const G      = "#AAFF00";
-const G_DIM  = "rgba(170,255,0,0.12)";
+const G = "#AAFF00";
+const G_DIM = "rgba(170,255,0,0.12)";
 const G_GLOW = "rgba(170,255,0,0.35)";
 const G_SOFT = "rgba(170,255,0,0.05)";
-const BG     = "#050905";
+const BG = "#050905";
 
 // ── 3D Particle Globe (Canvas) ────────────────────────────────────────────────
 function ParticleGlobe() {
   const canvasRef = useRef(null);
-  const rafRef    = useRef(null);
+  const rafRef = useRef(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -24,29 +24,29 @@ function ParticleGlobe() {
     // Responsive sizing
     let W = canvas.offsetWidth;
     let H = canvas.offsetHeight;
-    canvas.width  = W;
+    canvas.width = W;
     canvas.height = H;
 
     const resize = () => {
       W = canvas.offsetWidth;
       H = canvas.offsetHeight;
-      canvas.width  = W;
+      canvas.width = W;
       canvas.height = H;
     };
     window.addEventListener("resize", resize);
 
     // ── Generate sphere points ──────────────────────────────────────────────
-    const NUM_DOTS  = 280;
-    const RADIUS    = Math.min(W, H) * 0.38;
-    const CX        = W * 0.5;
-    const CY        = H * 0.5;
+    const NUM_DOTS = 280;
+    const RADIUS = Math.min(W, H) * 0.38;
+    const CX = W * 0.5;
+    const CY = H * 0.5;
 
     // Fibonacci sphere distribution for even spread
     const pts = [];
     const goldenRatio = Math.PI * (3 - Math.sqrt(5));
     for (let i = 0; i < NUM_DOTS; i++) {
-      const y     = 1 - (i / (NUM_DOTS - 1)) * 2;
-      const r     = Math.sqrt(1 - y * y);
+      const y = 1 - (i / (NUM_DOTS - 1)) * 2;
+      const r = Math.sqrt(1 - y * y);
       const theta = goldenRatio * i;
       pts.push({
         ox: Math.cos(theta) * r,       // original 3D coords on unit sphere
@@ -69,18 +69,18 @@ function ParticleGlobe() {
       opacity: Math.random() * 0.4 + 0.1,
     }));
 
-    let angle  = 0;
-    let tiltX  = 0.18;  // slight tilt so it looks 3D
-    let t      = 0;
+    let angle = 0;
+    let tiltX = 0.18;  // slight tilt so it looks 3D
+    let t = 0;
 
     const draw = () => {
       ctx.clearRect(0, 0, W, H);
 
       // ── Central glow ─────────────────────────────────────────────────────
       const grd = ctx.createRadialGradient(CX, CY, 0, CX, CY, RADIUS * 1.2);
-      grd.addColorStop(0,   "rgba(170,255,0,0.06)");
+      grd.addColorStop(0, "rgba(170,255,0,0.06)");
       grd.addColorStop(0.5, "rgba(170,255,0,0.02)");
-      grd.addColorStop(1,   "transparent");
+      grd.addColorStop(1, "transparent");
       ctx.fillStyle = grd;
       ctx.beginPath();
       ctx.arc(CX, CY, RADIUS * 1.2, 0, Math.PI * 2);
@@ -94,21 +94,21 @@ function ParticleGlobe() {
 
       const projected = pts.map((p, idx) => {
         // Rotate Y-axis
-        const rx  = p.ox * cosA - p.oz * sinA;
-        const rz  = p.ox * sinA + p.oz * cosA;
-        const ry  = p.oy;
+        const rx = p.ox * cosA - p.oz * sinA;
+        const rz = p.ox * sinA + p.oz * cosA;
+        const ry = p.oy;
         // Rotate X-axis (tilt)
         const ry2 = ry * cosX - rz * sinX;
         const rz2 = ry * sinX + rz * cosX;
 
         const scale = RADIUS / (RADIUS + rz2 * RADIUS * 0.4); // perspective
-        const sx    = CX + rx * RADIUS * scale;
-        const sy    = CY + ry2 * RADIUS * scale;
+        const sx = CX + rx * RADIUS * scale;
+        const sy = CY + ry2 * RADIUS * scale;
         const depth = (rz2 + 1) / 2; // 0=back, 1=front
 
         const pulse = Math.sin(t * 0.04 + p.pulse) * 0.3 + 0.7;
         const alpha = depth * 0.75 * p.brightness * pulse;
-        const size  = p.size * scale * (0.6 + depth * 0.5);
+        const size = p.size * scale * (0.6 + depth * 0.5);
 
         return { x: sx, y: sy, depth, alpha, size, idx };
       });
@@ -123,14 +123,14 @@ function ParticleGlobe() {
           if (b.depth < 0.35) continue;
           const dx = a.x - b.x;
           const dy = a.y - b.y;
-          const d  = Math.sqrt(dx * dx + dy * dy);
+          const d = Math.sqrt(dx * dx + dy * dy);
           if (d < LINK_DIST) {
             const opac = ((1 - d / LINK_DIST) * Math.min(a.depth, b.depth) * 0.45).toFixed(3);
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
             ctx.strokeStyle = `rgba(170,255,0,${opac})`;
-            ctx.lineWidth   = 0.4;
+            ctx.lineWidth = 0.4;
             ctx.stroke();
           }
         }
@@ -202,9 +202,9 @@ function ParticleGlobe() {
 
 // ── Main LandingPage ──────────────────────────────────────────────────────────
 export default function LandingPage({ onStartScan }) {
-  const [input,   setInput]   = useState("");
+  const [input, setInput] = useState("");
   const [focused, setFocused] = useState(false);
-  const [error,   setError]   = useState("");
+  const [error, setError] = useState("");
   const scanRef = useRef(null);
 
   const handleSubmit = (e) => {
@@ -275,8 +275,8 @@ export default function LandingPage({ onStartScan }) {
         >
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
             <svg width="22" height="22" viewBox="0 0 28 28" fill="none">
-              <polygon points="14,2 25,8 25,20 14,26 3,20 3,8" stroke={G} strokeWidth="1.5" fill="none"/>
-              <circle cx="14" cy="14" r="4" fill={G}/>
+              <polygon points="14,2 25,8 25,20 14,26 3,20 3,8" stroke={G} strokeWidth="1.5" fill="none" />
+              <circle cx="14" cy="14" r="4" fill={G} />
             </svg>
             <span style={{ fontSize: 15, fontWeight: 800, letterSpacing: "0.18em", color: "#fff", fontFamily: "var(--font-display)" }}>
               NETMAP
@@ -303,7 +303,7 @@ export default function LandingPage({ onStartScan }) {
               transition: "all 0.25s ease",
             }}
             onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.05)"; e.currentTarget.style.boxShadow = `0 0 28px ${G_GLOW}`; }}
-            onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)";    e.currentTarget.style.boxShadow = `0 0 18px ${G_GLOW}`; }}
+            onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)"; e.currentTarget.style.boxShadow = `0 0 18px ${G_GLOW}`; }}
           >
             Start Scan
             <span style={{ width: 22, height: 22, borderRadius: "50%", background: "rgba(0,0,0,0.2)", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -317,46 +317,63 @@ export default function LandingPage({ onStartScan }) {
           style={{
             flex: 1,
             display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
+            alignItems: "center",
+            justifyContent: "space-between",
             padding: "0 40px",
             position: "relative",
             zIndex: 5,
-            maxWidth: 700,
+            gap: 40,
           }}
         >
-          {/* Label */}
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 8,
-              marginBottom: 28,
-              animation: "fadeUp 0.6s ease both",
-            }}
-          >
-            <span style={{ color: G, fontSize: 11, letterSpacing: "0.25em", fontFamily: "var(--font-mono)", opacity: 0.8 }}>
-              [ ATTACK SURFACE INTELLIGENCE ]
-            </span>
+          {/* Left: Main Headlines */}
+          <div style={{ maxWidth: 700, flexShrink: 1 }}>
+            {/* Label */}
+            <div
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                marginBottom: 28,
+                animation: "fadeUp 0.6s ease both",
+              }}
+            >
+              <span style={{ color: G, fontSize: 11, letterSpacing: "0.25em", fontFamily: "var(--font-mono)", opacity: 0.8 }}>
+                [ Know What’s Exposed. Fix What Matters. ]
+              </span>
+            </div>
+
+            {/* Big Headline */}
+            <h1
+              style={{
+                fontSize: "clamp(3rem, 7vw, 5.5rem)",
+                fontWeight: 800,
+                color: "#fff",
+                lineHeight: 1.05,
+                letterSpacing: "-0.02em",
+                marginBottom: 0,
+                fontFamily: "var(--font-display)",
+                animation: "fadeUp 0.6s ease 0.1s both",
+              }}
+            >
+              Attack Surface
+              <br />
+              <span style={{ color: "#fff" }}>Intelligence.</span>
+            </h1>
           </div>
 
-          {/* Big Headline */}
-          <h1
+          {/* Right: Tagline */}
+          <div
             style={{
-              fontSize: "clamp(3rem, 7vw, 5.5rem)",
-              fontWeight: 800,
-              color: "#fff",
-              lineHeight: 1.05,
-              letterSpacing: "-0.02em",
-              marginBottom: 0,
-              fontFamily: "var(--font-display)",
-              animation: "fadeUp 0.6s ease 0.1s both",
+              maxWidth: 270,
+              paddingLeft: 30,
+              borderLeft: `2px solid ${G_DIM}`,
+              animation: "fadeUp 0.6s ease 0.3s both",
             }}
           >
-            Attack Surface
-            <br />
-            <span style={{ color: "#fff" }}>Intelligence.</span>
-          </h1>
+            <p style={{ color: G, opacity: 0.85, fontSize: 18, lineHeight: 1.9, fontFamily: "var(--font-body)", margin: 0, letterSpacing: "0.01em" }}>
+              NetMap discovers your company’s hidden internet assets — subdomains, exposed services, admin panels, and cloud storage — and highlights what’s risky.
+            </p>
+          </div>
         </div>
 
         {/* Bottom bar */}
@@ -364,10 +381,7 @@ export default function LandingPage({ onStartScan }) {
           style={{
             position: "relative",
             zIndex: 5,
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            borderTop: "1px solid rgba(170,255,0,0.1)",
-            padding: "20px 40px",
+            padding: "20px 60px",
             animation: "fadeUp 0.6s ease 0.3s both",
           }}
         >
@@ -387,14 +401,8 @@ export default function LandingPage({ onStartScan }) {
               letterSpacing: "0.05em",
             }}
           >
-            <ArrowDown size={16} color={G} style={{ animation: "bounce 2s ease-in-out infinite" }} />
-            Scroll to scan
+            <ArrowDown size={20} color={G} style={{ animation: "bounce 2s ease-in-out infinite" }} />
           </button>
-
-          {/* Right: Tagline */}
-          <p style={{ color: "rgba(255,255,255,0.55)", fontSize: 15, lineHeight: 1.65, fontFamily: "var(--font-body)" }}>
-            NetMap maps every subdomain, open port, exposed service, and cloud bucket — automatically, with no credentials required.
-          </p>
         </div>
 
         {/* Bottom nav pills */}
@@ -485,8 +493,8 @@ export default function LandingPage({ onStartScan }) {
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: 36, position: "relative", zIndex: 2 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}>
             <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-              <polygon points="14,2 25,8 25,20 14,26 3,20 3,8" stroke={G} strokeWidth="1.5" fill="none"/>
-              <circle cx="14" cy="14" r="4" fill={G}/>
+              <polygon points="14,2 25,8 25,20 14,26 3,20 3,8" stroke={G} strokeWidth="1.5" fill="none" />
+              <circle cx="14" cy="14" r="4" fill={G} />
             </svg>
             <span style={{ fontSize: 20, fontWeight: 800, letterSpacing: "0.18em", color: "#fff", fontFamily: "var(--font-display)" }}>
               NETMAP
@@ -510,7 +518,7 @@ export default function LandingPage({ onStartScan }) {
             }}
           >
             Know what you've
-            <br/>exposed.
+            <br />exposed.
           </h2>
           <p style={{ fontSize: 16, color: "rgba(255,255,255,0.5)", lineHeight: 1.7, fontFamily: "var(--font-body)" }}>
             NetMap scans your domain and finds every security gap —{" "}
@@ -592,7 +600,7 @@ export default function LandingPage({ onStartScan }) {
                 letterSpacing: "0.04em",
               }}
               onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.03)"; e.currentTarget.style.boxShadow = `0 0 30px rgba(170,255,0,0.5)`; }}
-              onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)";    e.currentTarget.style.boxShadow = `0 0 20px rgba(170,255,0,0.3)`; }}
+              onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)"; e.currentTarget.style.boxShadow = `0 0 20px rgba(170,255,0,0.3)`; }}
             >
               Start Scan
               <ArrowRight size={15} />

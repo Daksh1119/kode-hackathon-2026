@@ -43,8 +43,8 @@ from urllib.request import Request, urlopen
 
 log = logging.getLogger("sensitive_file_scanner")
 
-TIMEOUT     = 6      # seconds per HTTP request
-MAX_WORKERS = 30     # concurrent probes
+TIMEOUT     = 1      # seconds per HTTP request
+MAX_WORKERS = 200    # concurrent probes
 BODY_LIMIT  = 8192   # bytes to read for content inspection
 
 
@@ -172,8 +172,6 @@ SENSITIVE_PATHS: list[tuple[str, str, str]] = [
     # ── Misc known leaks ──────────────────────────────────────────────────────
     ("/crossdomain.xml",          "Flash cross-domain policy",            "LOW"),
     ("/clientaccesspolicy.xml",   "Silverlight cross-domain policy",      "LOW"),
-    ("/robots.txt",               "Robots exclusion file (info only)",    "LOW"),
-    ("/sitemap.xml",              "Sitemap (path enumeration)",           "LOW"),
     ("/CHANGELOG.md",             "Changelog (version disclosure)",       "LOW"),
     ("/CHANGELOG",                "Changelog (version disclosure)",       "LOW"),
     ("/README.md",                "README file",                          "LOW"),
@@ -368,7 +366,7 @@ def _run_nuclei_template(
 
     log.info(f"[Nuclei] Running template: {' '.join(cmd)}")
     try:
-        result = subprocess.run(cmd, capture_output=True, text=True, timeout=300)
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
         if result.returncode != 0:
             log.warning(f"[Nuclei template] Exited {result.returncode}")
     except (FileNotFoundError, subprocess.TimeoutExpired, Exception) as e:
@@ -491,13 +489,10 @@ def scan_sensitive_files(
                 log.info(f"  [File Scanner] Scanned {done}/{len(live)} hosts, "
                          f"{len(all_findings)} finding(s) so far...")
 
-    # ── Layer 3: Nuclei template (optional) ──────────────────────────────────
+    # ── Layer 3: Nuclei template (disabled for speed — HTTP probing is sufficient)
     nuclei_findings: list[dict] = []
-    if nuclei_exe:
-        http_live = [h["host"] for h in scan_data if 200 <= h.get("status", 0) < 400]
-        nuclei_raw      = _run_nuclei_template(http_live, nuclei_exe, template_path)
-        nuclei_findings = _nuclei_to_findings(nuclei_raw)
-        log.info(f"[File Scanner] Nuclei template: {len(nuclei_findings)} finding(s)")
+    # Nuclei template scan skipped to keep total pipeline under 60s.
+    # The HTTP probe + content inspection layers above already cover the same paths.
 
     combined = all_findings + nuclei_findings
 

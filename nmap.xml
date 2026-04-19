@@ -1,48 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE nmaprun>
 <?xml-stylesheet href="file:///C:/Program Files (x86)/Nmap/nmap.xsl" type="text/xsl"?>
-<!-- Nmap 7.99 scan initiated Sat Apr 18 23:12:01 2026 as: &quot;C:\\Program Files (x86)\\Nmap\\nmap.exe&quot; -T4 -Pn -&#45;min-rate 2000 -&#45;max-retries 1 -&#45;host-timeout 5s -&#45;open -p 21,22,23,25,53,80,135,139,443,445,1433,1521,3306,3389,5432,5900,6379,8080,8443,8888,9200,9300,11211,27017 -oX nmap.xml -iL targets.txt -->
-<nmaprun scanner="nmap" args="&quot;C:\\Program Files (x86)\\Nmap\\nmap.exe&quot; -T4 -Pn -&#45;min-rate 2000 -&#45;max-retries 1 -&#45;host-timeout 5s -&#45;open -p 21,22,23,25,53,80,135,139,443,445,1433,1521,3306,3389,5432,5900,6379,8080,8443,8888,9200,9300,11211,27017 -oX nmap.xml -iL targets.txt" start="1776534121" startstr="Sat Apr 18 23:12:01 2026" version="7.99" xmloutputversion="1.05">
-<scaninfo type="syn" protocol="tcp" numservices="24" services="21-23,25,53,80,135,139,443,445,1433,1521,3306,3389,5432,5900,6379,8080,8443,8888,9200,9300,11211,27017"/>
+<!-- Nmap 7.99 scan initiated Sun Apr 19 07:35:27 2026 as: &quot;C:\\Program Files (x86)\\Nmap\\nmap.exe&quot; -T4 -Pn -&#45;min-rate 2000 -&#45;max-retries 1 -&#45;host-timeout 5s -&#45;open -p 22,80,443,445,3306,3389 -oX nmap.xml -iL targets.txt -->
+<nmaprun scanner="nmap" args="&quot;C:\\Program Files (x86)\\Nmap\\nmap.exe&quot; -T4 -Pn -&#45;min-rate 2000 -&#45;max-retries 1 -&#45;host-timeout 5s -&#45;open -p 22,80,443,445,3306,3389 -oX nmap.xml -iL targets.txt" start="1776564327" startstr="Sun Apr 19 07:35:27 2026" version="7.99" xmloutputversion="1.05">
+<scaninfo type="syn" protocol="tcp" numservices="6" services="22,80,443,445,3306,3389"/>
 <verbose level="0"/>
 <debugging level="0"/>
-<host starttime="1776534122" endtime="1776534123"><status state="up" reason="user-set" reason_ttl="0"/>
-<address addr="172.66.147.243" addrtype="ipv4"/>
+<host starttime="1776564327" endtime="1776564327"><status state="up" reason="user-set" reason_ttl="0"/>
+<address addr="3.109.164.177" addrtype="ipv4"/>
 <hostnames>
-<hostname name="example.com" type="user"/>
+<hostname name="fb.lodhagroup.com" type="user"/>
+<hostname name="ec2-3-109-164-177.ap-south-1.compute.amazonaws.com" type="PTR"/>
 </hostnames>
-<ports><extraports state="filtered" count="17">
-<extrareasons reason="no-response" count="16" proto="tcp" ports="22-23,135,139,445,1433,1521,3306,3389,5432,6379,8888,9200,9300,11211,27017"/>
-<extrareasons reason="admin-prohibited" count="1" proto="tcp" ports="5900"/>
+<ports><extraports state="filtered" count="4">
+<extrareasons reason="no-response" count="4" proto="tcp" ports="22,445,3306,3389"/>
 </extraports>
-<port protocol="tcp" portid="21"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="ftp" method="table" conf="3"/></port>
-<port protocol="tcp" portid="25"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="smtp" method="table" conf="3"/></port>
-<port protocol="tcp" portid="53"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="domain" method="table" conf="3"/></port>
+<port protocol="tcp" portid="80"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="http" method="table" conf="3"/></port>
+<port protocol="tcp" portid="443"><state state="open" reason="syn-ack" reason_ttl="250"/><service name="https" method="table" conf="3"/></port>
+</ports>
+<times srtt="43375" rttvar="48000" to="235375"/>
+</host>
+<host starttime="1776564327" endtime="1776564327"><status state="up" reason="user-set" reason_ttl="0"/>
+<address addr="13.127.0.200" addrtype="ipv4"/>
+<hostnames>
+<hostname name="www.lodhagroup.com" type="user"/>
+<hostname name="ec2-13-127-0-200.ap-south-1.compute.amazonaws.com" type="PTR"/>
+</hostnames>
+<ports><extraports state="filtered" count="4">
+<extrareasons reason="no-response" count="4" proto="tcp" ports="22,445,3306,3389"/>
+</extraports>
+<port protocol="tcp" portid="80"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="http" method="table" conf="3"/></port>
+<port protocol="tcp" portid="443"><state state="open" reason="syn-ack" reason_ttl="122"/><service name="https" method="table" conf="3"/></port>
+</ports>
+<times srtt="40750" rttvar="39500" to="198750"/>
+</host>
+<host starttime="1776564327" endtime="1776564327"><status state="up" reason="user-set" reason_ttl="0"/>
+<address addr="172.66.0.145" addrtype="ipv4"/>
+<hostnames>
+<hostname name="servicedesk.lodhagroup.com" type="user"/>
+</hostnames>
+<ports><extraports state="filtered" count="4">
+<extrareasons reason="no-response" count="4" proto="tcp" ports="22,445,3306,3389"/>
+</extraports>
 <port protocol="tcp" portid="80"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="http" method="table" conf="3"/></port>
 <port protocol="tcp" portid="443"><state state="open" reason="syn-ack" reason_ttl="59"/><service name="https" method="table" conf="3"/></port>
-<port protocol="tcp" portid="8080"><state state="open" reason="syn-ack" reason_ttl="59"/><service name="http-proxy" method="table" conf="3"/></port>
-<port protocol="tcp" portid="8443"><state state="open" reason="syn-ack" reason_ttl="59"/><service name="https-alt" method="table" conf="3"/></port>
 </ports>
-<times srtt="43910" rttvar="22085" to="132250"/>
+<times srtt="34250" rttvar="33250" to="167250"/>
 </host>
-<host starttime="1776534122" endtime="1776534123"><status state="up" reason="user-set" reason_ttl="0"/>
-<address addr="104.20.23.154" addrtype="ipv4"/>
+<host starttime="1776564327" endtime="1776564328"><status state="up" reason="user-set" reason_ttl="0"/>
+<address addr="13.127.0.200" addrtype="ipv4"/>
 <hostnames>
-<hostname name="www.example.com" type="user"/>
+<hostname name="lodhagroup.com" type="user"/>
+<hostname name="ec2-13-127-0-200.ap-south-1.compute.amazonaws.com" type="PTR"/>
 </hostnames>
-<ports><extraports state="filtered" count="17">
-<extrareasons reason="no-response" count="17" proto="tcp" ports="22-23,135,139,445,1433,1521,3306,3389,5432,5900,6379,8888,9200,9300,11211,27017"/>
+<ports><extraports state="filtered" count="4">
+<extrareasons reason="no-response" count="4" proto="tcp" ports="22,445,3306,3389"/>
 </extraports>
-<port protocol="tcp" portid="21"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="ftp" method="table" conf="3"/></port>
-<port protocol="tcp" portid="25"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="smtp" method="table" conf="3"/></port>
-<port protocol="tcp" portid="53"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="domain" method="table" conf="3"/></port>
 <port protocol="tcp" portid="80"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="http" method="table" conf="3"/></port>
-<port protocol="tcp" portid="443"><state state="open" reason="syn-ack" reason_ttl="59"/><service name="https" method="table" conf="3"/></port>
-<port protocol="tcp" portid="8080"><state state="open" reason="syn-ack" reason_ttl="59"/><service name="http-proxy" method="table" conf="3"/></port>
-<port protocol="tcp" portid="8443"><state state="open" reason="syn-ack" reason_ttl="59"/><service name="https-alt" method="table" conf="3"/></port>
+<port protocol="tcp" portid="443"><state state="open" reason="syn-ack" reason_ttl="122"/><service name="https" method="table" conf="3"/></port>
 </ports>
-<times srtt="36462" rttvar="18259" to="109498"/>
+<times srtt="17000" rttvar="15500" to="100000"/>
 </host>
-<runstats><finished time="1776534123" timestr="Sat Apr 18 23:12:03 2026" summary="Nmap done at Sat Apr 18 23:12:03 2026; 2 IP addresses (2 hosts up) scanned in 1.91 seconds" elapsed="1.91" exit="success"/><hosts up="2" down="0" total="2"/>
+<runstats><finished time="1776564328" timestr="Sun Apr 19 07:35:28 2026" summary="Nmap done at Sun Apr 19 07:35:28 2026; 4 IP addresses (4 hosts up) scanned in 1.23 seconds" elapsed="1.23" exit="success"/><hosts up="4" down="0" total="4"/>
 </runstats>
 </nmaprun>

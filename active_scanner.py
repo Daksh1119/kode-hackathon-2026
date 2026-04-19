@@ -189,7 +189,7 @@ def run_nmap(
         extra         = ["-sV", "--version-intensity", "0"]  # version detection, minimal intensity
         proc_timeout  = 600
     elif demo_mode:
-        port_args     = ["-p", _FAST_PORTS]
+        port_args     = ["-p", "22,80,443,445,3306,3389"]  # Ultra-fast focused scan
         host_timeout  = "5s"
         extra         = []
         proc_timeout  = 60
@@ -348,11 +348,11 @@ def nmap_to_findings(nmap_data: list[dict]) -> list[dict]:
 
 # Templates scoped to fast, relevant categories only.
 # Avoids thousands of slow CVE / network templates that aren't useful for
-# attack-surface discovery.
-_NUCLEI_FAST_TAGS = "panel,exposure,misconfig,takeover,default-login,login,tech"
+# attack-surface discovery. 'tech' tag was removed for extreme speed.
+_NUCLEI_FAST_TAGS = "panel,default-login"
 
 # Tags to explicitly EXCLUDE — ssl/tls checks wait for TLS handshakes (slow)
-_NUCLEI_EXCLUDE_TAGS = "ssl,tls,dns,fuzzing,dos"
+_NUCLEI_EXCLUDE_TAGS = "ssl,tls,dns,fuzzing,dos,cve"
 
 
 def run_nuclei(
@@ -405,7 +405,7 @@ def run_nuclei(
     rate_limit           = "300" if demo_mode else "150"
     concurrency          = "100" if demo_mode else "50"
     bulk_size            = "100" if demo_mode else "50"
-    proc_timeout         = 90   if demo_mode else 300   # was 1200!
+    proc_timeout         = 30   if demo_mode else 300   # was 1200!
 
     # Flags common to both v2 and v3
     common_speed_flags = [
@@ -427,8 +427,6 @@ def run_nuclei(
         cmd = [nuclei, "-l", targets_file, "-json-export", output_json, *common_speed_flags]
 
     return _run(cmd, "Nuclei", timeout=proc_timeout)
-
-    return _run(cmd, "Nuclei", timeout=1200)
 
 
 def parse_nuclei(json_file: str = "nuclei.jsonl") -> list[dict]:

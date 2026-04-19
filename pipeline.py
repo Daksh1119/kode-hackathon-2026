@@ -348,7 +348,7 @@ def stage_cloud_scan(
     # ── Part A: Bucket checks on root domain ──────────────────────────────────
     print(f"  Running bucket checks on root domain: {domain}")
     try:
-        cloud_report = cloud_full_scan(domain, timeout=3.0, max_guesses=6, include_gcp=True)
+        cloud_report = cloud_full_scan(domain, timeout=1.0, max_guesses=4, include_gcp=True)
     except Exception as exc:
         print(f"  {WARN}[WARN] Bucket checks failed: {exc}{RESET}")
         cloud_report = {}
@@ -477,7 +477,7 @@ def stage_cloud_scan(
     dir_count = 0
     for host in live_subdomains:
         try:
-            hits = check_open_directories(host, timeout=3.0, max_workers=10)
+            hits = check_open_directories(host, timeout=1.0, max_workers=100)
         except Exception:
             hits = []
         for item in hits:

@@ -1,12 +1,45 @@
 [
   {
-    "id": "7b5c2eca-c3ea-4fa7-a685-0fca4085c6df",
+    "id": "2939c075-e6c9-465f-b772-6ee747ae16a3",
+    "severity": "HIGH",
+    "title": "Login Page Confirmed on Public Subdomain",
+    "host": "helpdesk.net4hc.in",
+    "status": 200,
+    "status_label": "Active (200 OK)",
+    "description": "The subdomain 'helpdesk.net4hc.in' was confirmed by page analysis to serve a login page, even though its name gave no indication of this. This login surface is publicly reachable and is a target for brute-force and credential-stuffing attacks.",
+    "action": "Enable MFA on all accounts accessible via this page. Enforce rate-limiting and account lockout. Verify the page is intentionally public-facing.",
+    "timestamp": "2026-04-19T01:40:59",
+    "source": "engine",
+    "page_type": "login",
+    "page_title": "Welcome to :: Helpdesk Management",
+    "page_signals": [
+      "password input field found in HTML"
+    ],
+    "priority_tier": "P0",
+    "priority_score": 93,
+    "fix_efficiency": 7.0,
+    "_urgency_factors": {
+      "exploitability": 5,
+      "impact": 5,
+      "exposure": 5,
+      "privilege_potential": 5,
+      "asset_criticality": 5,
+      "evidence_confidence": 3
+    },
+    "remediation": {
+      "recommended_sla": "24h",
+      "owner_category": "AppSec / Dev Team",
+      "effort_level": 4
+    }
+  },
+  {
+    "id": "ae42f677-9633-433c-b358-66d540288bff",
     "severity": "MEDIUM",
     "title": "Port 80 Open \u2014 HTTP",
-    "host": "example.com",
-    "description": "Port 80/tcp (http) is open on example.com. HTTP \u2014 unencrypted web traffic. Verify this is intentionally public.",
+    "host": "net4hc.in",
+    "description": "Port 80/tcp (http) is open on net4hc.in. HTTP \u2014 unencrypted web traffic. Verify this is intentionally public.",
     "action": "Confirm port 80 is intentionally internet-facing. Ensure the service is up to date and properly configured.",
-    "timestamp": "2026-04-19T00:39:07",
+    "timestamp": "2026-04-19T01:41:00",
     "source": "nmap",
     "port": 80,
     "priority_tier": "P2",
@@ -27,13 +60,13 @@
     }
   },
   {
-    "id": "24fd9ca9-428a-4134-b8ff-b0bf0129cd1d",
+    "id": "d231b477-9639-4ccb-9cf3-5cda12f765ca",
     "severity": "MEDIUM",
     "title": "Port 443 Open \u2014 HTTPS",
-    "host": "example.com",
-    "description": "Port 443/tcp (https) is open on example.com. HTTPS \u2014 encrypted web traffic. Verify this is intentionally public.",
+    "host": "net4hc.in",
+    "description": "Port 443/tcp (https) is open on net4hc.in. HTTPS \u2014 encrypted web traffic. Verify this is intentionally public.",
     "action": "Confirm port 443 is intentionally internet-facing. Ensure the service is up to date and properly configured.",
-    "timestamp": "2026-04-19T00:39:07",
+    "timestamp": "2026-04-19T01:41:00",
     "source": "nmap",
     "port": 443,
     "priority_tier": "P2",
@@ -54,13 +87,13 @@
     }
   },
   {
-    "id": "9fa635b3-dd89-43b4-9d22-239539c942b5",
+    "id": "cfceb34e-c48b-497d-90dc-45cefd7b9d01",
     "severity": "MEDIUM",
     "title": "Port 80 Open \u2014 HTTP",
-    "host": "www.example.com",
-    "description": "Port 80/tcp (http) is open on www.example.com. HTTP \u2014 unencrypted web traffic. Verify this is intentionally public.",
+    "host": "helpdesk.net4hc.in",
+    "description": "Port 80/tcp (http) is open on helpdesk.net4hc.in. HTTP \u2014 unencrypted web traffic. Verify this is intentionally public.",
     "action": "Confirm port 80 is intentionally internet-facing. Ensure the service is up to date and properly configured.",
-    "timestamp": "2026-04-19T00:39:07",
+    "timestamp": "2026-04-19T01:41:00",
     "source": "nmap",
     "port": 80,
     "priority_tier": "P2",
@@ -81,13 +114,13 @@
     }
   },
   {
-    "id": "95779fe7-2311-4899-a6e7-a1870058d9f9",
+    "id": "77d977ed-d5d2-4c3c-a0e3-b5d6d27a88a7",
     "severity": "MEDIUM",
     "title": "Port 443 Open \u2014 HTTPS",
-    "host": "www.example.com",
-    "description": "Port 443/tcp (https) is open on www.example.com. HTTPS \u2014 encrypted web traffic. Verify this is intentionally public.",
+    "host": "helpdesk.net4hc.in",
+    "description": "Port 443/tcp (https) is open on helpdesk.net4hc.in. HTTPS \u2014 encrypted web traffic. Verify this is intentionally public.",
     "action": "Confirm port 443 is intentionally internet-facing. Ensure the service is up to date and properly configured.",
-    "timestamp": "2026-04-19T00:39:07",
+    "timestamp": "2026-04-19T01:41:00",
     "source": "nmap",
     "port": 443,
     "priority_tier": "P2",

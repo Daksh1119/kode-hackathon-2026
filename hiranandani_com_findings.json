@@ -1,12 +1,12 @@
 [
   {
-    "id": "f7886fa9-1c4e-4167-ab21-259f56aee058",
+    "id": "8cf83c3b-e66a-4684-b6a2-7c1a02acc435",
     "severity": "HIGH",
     "title": "Public Cloud Bucket Exposed \u2014 S3",
     "host": "hiranandani.com",
     "description": "The bucket 'hiranandani' on S3 (http://hiranandani.s3.amazonaws.com) is publicly accessible (HTTP 200). Anyone on the internet can read its contents.",
     "action": "Immediately set the bucket ACL / policy to private. Audit its contents for sensitive data. Enable access logging and review who accessed it.",
-    "timestamp": "2026-04-18T20:59:14",
+    "timestamp": "2026-04-18T21:55:25",
     "source": "cloud",
     "priority_tier": "P1",
     "priority_score": 80,
@@ -26,13 +26,13 @@
     }
   },
   {
-    "id": "904a28fb-6bdc-4964-9766-05c0a58e429f",
+    "id": "6cd0a8b9-cb41-4ed7-a97a-3121a4779c2e",
     "severity": "HIGH",
     "title": "Bucket Directory Listing Enabled \u2014 S3",
     "host": "hiranandani.com",
     "description": "Bucket 'hiranandani' on S3 (http://hiranandani.s3.amazonaws.com) has directory listing enabled \u2014 all stored objects can be enumerated. Sample objects: 09augmiddle.jpg, 123.jpg, 12juneomr.jpg, 29may_deven.jpg, 29may_omr.jpg.",
     "action": "Disable public listing on the bucket. Review listed objects for sensitive data and rotate any exposed credentials.",
-    "timestamp": "2026-04-18T20:59:14",
+    "timestamp": "2026-04-18T21:55:25",
     "source": "cloud",
     "priority_tier": "P2",
     "priority_score": 63,

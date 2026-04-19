@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { X, Copy, Check, Sparkles, Loader2 } from "lucide-react";
+import { X, Copy, Check, Sparkles, Loader2, Brain } from "lucide-react";
 import { SEVERITY_CONFIG } from "../utils/severityHelpers";
 
 export default function DetailDrawer({ finding, onClose }) {
@@ -9,31 +9,84 @@ export default function DetailDrawer({ finding, onClose }) {
   const [copied, setCopied] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
+  // Grok AI explanation state
+  const [aiExplain, setAiExplain] = useState(null);
+  const [aiLoading, setAiLoading] = useState(false);
+
   // Animate in
   useEffect(() => {
     requestAnimationFrame(() => setIsVisible(true));
   }, []);
 
-  // Reset on finding change
+  // Reset on finding change + fetch AI explanation
   useEffect(() => {
     setShowFix(false);
     setGenerating(false);
     setFixCode("");
     setCopied(false);
+    setAiExplain(null);
+
+    if (finding?.id) {
+      fetchAiExplanation(finding);
+    }
   }, [finding?.id]);
+
+  const fetchAiExplanation = async (f) => {
+    setAiLoading(true);
+    try {
+      const res = await fetch("http://localhost:3001/api/explain", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: f.title,
+          description: f.description,
+          action: f.action,
+          severity: f.severity,
+          host: f.host,
+        }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setAiExplain(data);
+      }
+    } catch (err) {
+      console.error("AI explain failed:", err);
+    } finally {
+      setAiLoading(false);
+    }
+  };
 
   const handleClose = () => {
     setIsVisible(false);
     setTimeout(onClose, 400);
   };
 
-  const handleGenerateFix = () => {
+  const handleGenerateFix = async () => {
     setGenerating(true);
-    const code = finding.fixCode || "// No remediation code available for this finding.";
-    let index = 0;
     setFixCode("");
     setShowFix(true);
+    
+    let code = finding.fixCode || "";
 
+    if (!code) {
+      try {
+        const response = await fetch("http://localhost:3001/api/remediate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            title: finding.title,
+            description: finding.description,
+            host: finding.host
+          })
+        });
+        const data = await response.json();
+        code = data.code || "// No remediation generated.";
+      } catch (e) {
+        code = "// Failed to reach remediation API.";
+      }
+    }
+
+    let index = 0;
     const interval = setInterval(() => {
       if (index < code.length) {
         setFixCode((prev) => prev + code[index]);
@@ -59,6 +112,11 @@ export default function DetailDrawer({ finding, onClose }) {
 
   const isCloud = finding.source === "cloud";
   const isMobile = window.innerWidth < 768;
+
+  // Decide what to display for "What Is This?" and "How To Fix"
+  const displayWhat = aiExplain?.whatIsThis || finding.whatItIs || finding.description;
+  const displayFix = aiExplain?.howToFix || finding.action;
+  const isGroqPowered = aiExplain?.source === "groq" || aiExplain?.source === "groq-raw";
 
   return (
     <>
@@ -220,14 +278,38 @@ export default function DetailDrawer({ finding, onClose }) {
             </DrawerSection>
           )}
 
-          {/* What is this? */}
-          {finding.whatItIs && (
-            <DrawerSection title="What Is This?">
-              <p style={{ fontSize: 14, color: "var(--text-2)", lineHeight: 1.65, maxWidth: "65ch" }}>
-                {finding.whatItIs}
-              </p>
-            </DrawerSection>
-          )}
+          {/* What is this? — AI-powered */}
+          <DrawerSection title="What Is This?">
+            {aiLoading ? (
+              <ShimmerBlock />
+            ) : (
+              <div>
+                {isGroqPowered && (
+                  <div style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 5,
+                    padding: "3px 10px",
+                    borderRadius: 999,
+                    background: "rgba(77,179,126,0.1)",
+                    border: "1px solid rgba(77,179,126,0.2)",
+                    marginBottom: 10,
+                    fontSize: 10,
+                    fontWeight: 600,
+                    color: "var(--green-accent)",
+                    letterSpacing: "0.05em",
+                    textTransform: "uppercase",
+                  }}>
+                    <Brain size={11} />
+                    Explained by Groq AI
+                  </div>
+                )}
+                <p style={{ fontSize: 14, color: "var(--text-2)", lineHeight: 1.75, maxWidth: "65ch" }}>
+                  {displayWhat}
+                </p>
+              </div>
+            )}
+          </DrawerSection>
 
           {/* Why does it matter? */}
           {finding.whyItMatters && (
@@ -270,20 +352,37 @@ export default function DetailDrawer({ finding, onClose }) {
             </DrawerSection>
           )}
 
-          {/* Fallback description */}
-          {!finding.whatItIs && (
-            <DrawerSection title="What Is This?">
-              <p style={{ fontSize: 14, color: "var(--text-2)", lineHeight: 1.65 }}>
-                {finding.description}
-              </p>
-            </DrawerSection>
-          )}
-
-          {/* How to fix */}
+          {/* How to fix — AI-powered */}
           <DrawerSection title="How To Fix It">
-            <p style={{ fontSize: 14, color: "var(--text-2)", lineHeight: 1.65 }}>
-              {finding.action}
-            </p>
+            {aiLoading ? (
+              <ShimmerBlock />
+            ) : (
+              <div>
+                {isGroqPowered && (
+                  <div style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 5,
+                    padding: "3px 10px",
+                    borderRadius: 999,
+                    background: "rgba(77,179,126,0.1)",
+                    border: "1px solid rgba(77,179,126,0.2)",
+                    marginBottom: 10,
+                    fontSize: 10,
+                    fontWeight: 600,
+                    color: "var(--green-accent)",
+                    letterSpacing: "0.05em",
+                    textTransform: "uppercase",
+                  }}>
+                    <Brain size={11} />
+                    Simplified by Groq AI
+                  </div>
+                )}
+                <p style={{ fontSize: 14, color: "var(--text-2)", lineHeight: 1.75, maxWidth: "65ch" }}>
+                  {displayFix}
+                </p>
+              </div>
+            )}
           </DrawerSection>
 
           {/* Exposed files (cloud findings) */}
@@ -489,6 +588,33 @@ export default function DetailDrawer({ finding, onClose }) {
         </div>
       </div>
     </>
+  );
+}
+
+// ─── Shimmer loading placeholder ──────────────────────────────────────
+function ShimmerBlock() {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+      {[100, 85, 60].map((w, i) => (
+        <div
+          key={i}
+          style={{
+            width: `${w}%`,
+            height: 14,
+            borderRadius: 6,
+            background: "linear-gradient(90deg, rgba(77,179,126,0.06) 25%, rgba(77,179,126,0.15) 50%, rgba(77,179,126,0.06) 75%)",
+            backgroundSize: "200% 100%",
+            animation: "shimmer 1.5s infinite linear",
+          }}
+        />
+      ))}
+      <style>{`
+        @keyframes shimmer {
+          0% { background-position: 200% 0; }
+          100% { background-position: -200% 0; }
+        }
+      `}</style>
+    </div>
   );
 }
 

@@ -539,8 +539,8 @@ _DIR_LISTING_SIGNATURES = [
 def check_open_directories(
     root_domain: str,
     *,
-    timeout: float = 3.0,
-    max_workers: int = 15,
+    timeout: float = 1.0,
+    max_workers: int = 150,
 ) -> list[dict]:
     """
     Scan the target web server for open / exposed directories.
@@ -715,19 +715,19 @@ def main() -> None:
     # Run all scans concurrently via thread pool
     scan_fns = {
         "public_buckets": lambda: check_public_cloud_storage(
-            domain, timeout=3.0, max_guesses=6, include_gcp=True
+            domain, timeout=1.0, max_guesses=6, include_gcp=True
         ),
         "bucket_listings": lambda: check_bucket_listing(
-            domain, timeout=3.0, max_guesses=6, include_gcp=True
+            domain, timeout=1.0, max_guesses=6, include_gcp=True
         ),
         "sensitive_files": lambda: check_sensitive_files(
-            domain, timeout=3.0, max_guesses=6, include_gcp=True
+            domain, timeout=1.0, max_guesses=6, include_gcp=True
         ),
         "write_access": lambda: check_write_access(
-            domain, timeout=3.0, max_guesses=6, include_gcp=True
+            domain, timeout=1.0, max_guesses=6, include_gcp=True
         ),
         "open_directories": lambda: check_open_directories(
-            domain, timeout=3.0
+            domain, timeout=1.0
         ),
     }
 
